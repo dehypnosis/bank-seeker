@@ -1,22 +1,96 @@
-﻿<Window x:Class="BankSeeker.MainWindow"
+﻿<Window 
+    x:Class="BankSeeker.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankSeeker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="700">
+        Title="BankSeeker" Height="540" Width="720" HorizontalAlignment="Center" MinWidth="280" MinHeight="480">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="369*"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="547*"/>
-            <ColumnDefinition Width="145*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="260"/>
         </Grid.ColumnDefinitions>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="449" Stroke="Black" VerticalAlignment="Top" Width="527" Margin="10,10,0,0" Grid.RowSpan="2"/>
-        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="36,29,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10" Grid.Row="2" Grid.ColumnSpan="2">
+            <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+                <ScrollViewer Grid.Row="1" Grid.Column="1" Padding="5">
+                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"><Span Foreground="Black"><Run Text="웹 페이지를 초기화..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="로딩이 끝나기를 기다림..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="계좌 정보 입력중..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="비밀번호 키패드 이미지 추출..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="번호별로 이미지 추출, 해싱을 통해 상관관계 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num7 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="예외 발생: 'System.ArgumentException'(mscorlib.dll)"/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="xxx3를 확정 할 수 없음... 재시작"/></Span><LineBreak/><Span Foreground="Black"><Run Text="웹 페이지를 초기화..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="로딩이 끝나기를 기다림..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="계좌 정보 입력중..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="비밀번호 키패드 이미지 추출..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="번호별로 이미지 추출, 해싱을 통해 상관관계 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num0 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num9 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num8 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num7 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num1 (136, 85) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 (192, 145) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num2 (192, 85) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num4 (136, 145) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="확인 (192, 315) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="1 페이지 파싱 및 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="1 페이지 거래 내역 없음. 파서 종료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="웹 페이지를 초기화..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="로딩이 끝나기를 기다림..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="계좌 정보 입력중..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="비밀번호 키패드 이미지 추출..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="번호별로 이미지 추출, 해싱을 통해 상관관계 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num9 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num7 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num0 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num8 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num1 (136, 85) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 (192, 145) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num2 (192, 85) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num4 (136, 145) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="확인 (192, 315) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="1 페이지 파싱 및 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="1 페이지 거래 내역 없음. 파서 종료..."/><InlineUIContainer></InlineUIContainer></Span></TextBlock>
+                </ScrollViewer>
+            </Border>
+        </Grid>
 
+
+
+        <TabControl Margin="10" VerticalContentAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+            <TabItem Header="거래 조회 내역" Padding="5">
+                <DataGrid Margin="5" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            </TabItem>
+            <TabItem Header="콜백 설정" Padding="5">
+                <DataGrid Margin="5" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            </TabItem>
+            <TabItem Header="도움말" Padding="5">
+                <RichTextBox Margin="5" BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly ="True">
+                    <RichTextBox.Resources>
+                        <Style TargetType="{x:Type Paragraph}">
+                            <Setter Property="Margin" Value="0"/>
+                        </Style>
+                    </RichTextBox.Resources>
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="도움을 드리고자.."/>
+                        </Paragraph>
+                        <Paragraph>
+                            <Run Text="어쩌구 저저구.."/>
+                        </Paragraph>
+                        <Paragraph>
+                            <Run/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+            </TabItem>
+        </TabControl>
+        <StackPanel Grid.Column="1" Margin="10">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="은행" Width="80"/>
+                <ComboBox SelectedIndex="0" >
+                    <ComboBoxItem>국민은행</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="계좌번호" Width="80"/>
+                <TextBox Height="23" TextWrapping="Wrap" Text="957502-01-427751" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="아이디" Width="80"/>
+                <TextBox Height="23" TextWrapping="Wrap" Text="YEO7311" Width="120"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="비밀번호" Width="80"/>
+                <PasswordBox Height="23" Width="120" Password="1234"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="시작 일자" Width="80"/>
+                <DatePicker Margin="0,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="종료 일자" Width="80"/>
+                <DatePicker Margin="0,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="자동 반복" Width="80"/>
+                <CheckBox Content="활성화" Height="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="반복 간격(s)" Width="80"/>
+                <Slider Width="100" Height="18"/>
+            </StackPanel>
+            <Button Content="실행" Height="25" />
+        </StackPanel>
     </Grid>
+
 </Window>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +23,24 @@ namespace BankSeeker.Lib
             public string type { get; set; }
         }
 
-        public Seeker()
+        private Teller teller;
+        internal void setTeller(Teller teller)
         {
-            Console.WriteLine($"{this.GetType().ToString()} Seeker Made");
+            this.teller = teller;
         }
-        public abstract Task<List<Packet>> Fetch(Account account, uint timeoutInterval); // 구현시 비동기 한정자 필요
+
+        public void Log(object log)
+        {
+            this.teller.Log(Convert.ToString(log));
+        }
+
+        protected uint TimeoutSeconds;
+        public void SetTimeoutSeconds(uint sec)
+        {
+            TimeoutSeconds = sec;
+        }
+
+        public abstract Task<List<Packet>> Fetch(Account account); // 구현시 비동기 한정자 필요
     }
 
     namespace Seekers
@@ -38,7 +52,7 @@ namespace BankSeeker.Lib
             {
                 throw new NotImplementedException();
             }
-            public override Task<List<Packet>> Fetch(Account account, uint timeoutInterval)
+            public override Task<List<Packet>> Fetch(Account account)
             {
                 throw new NotImplementedException();
             }

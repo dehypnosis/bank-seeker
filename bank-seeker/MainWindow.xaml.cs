@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BankSeeker.Lib;
+using System.IO;
 
 namespace BankSeeker
 {
@@ -31,12 +32,12 @@ namespace BankSeeker
                 BankType = Bank.Type.KB,
                 Number = "957502-01-427751",
                 UserId = "YEO7311",
-                Password = "1524"
+                Password = "1524",
+                From = DateTime.Today.AddDays(-1)
             };
-            Console.WriteLine(account.BankName);
-
             teller.SetAccount(account).SetTimerInterval(15).SetTimerEnabled(true);
             teller.AttachHandler(data => Console.WriteLine(data));
+            teller.AttachLogger(log => Console.WriteLine(log));
 
             Task.Run(async () => await teller.Fetch());
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,31 +22,33 @@ namespace BankSeeker.Lib
 
             System.Type BankSeekerType = Bank.GetSeekerType(account.BankType);
             seeker = (Seeker)Activator.CreateInstance(BankSeekerType);
+            seeker.setTeller(this);
+            seeker.SetTimeoutSeconds((uint)(timer.Interval / 1000));
             return this;
         }
 
-        // 계좌 데이터 가져오기 및 이벤트 발행/구독 (데이터 갱신 여부 체크는 Teller가 하지 않음)
-        public delegate void TellerEventHandler(List<Seeker.Packet> packets);
-        private event TellerEventHandler TellerEvent;
+        // 계좌 데이터 가져오기 및 이벤트 발행/구독 (데이터 갱신 여부는 체크하지 않음)
+        public delegate void TellerPacketEventHandler(List<Seeker.Packet> packets);
+        private event TellerPacketEventHandler TellerPacketEvent;
         public async Task Fetch()
         {
             account.Validate();
-            var packets = await seeker.Fetch(account, (uint)(timer.Interval/1000));
-            if (packets != null && packets.Count > 0) TellerEvent(packets);
+            var packets = await seeker.Fetch(account);
+            if (packets != null && packets.Count > 0) TellerPacketEvent(packets);
         }
-        public Teller AttachHandler(TellerEventHandler handler)
+        public Teller AttachHandler(TellerPacketEventHandler handler)
         {
-            TellerEvent += handler;
+            TellerPacketEvent += handler;
             return this;
         }
-        public Teller DetachHandler(TellerEventHandler handler)
+        public Teller DetachHandler(TellerPacketEventHandler handler)
         {
-            TellerEvent -= handler;
+            TellerPacketEvent -= handler;
             return this;
         }
         private void InitHandler() // 생성자에서 콜
         {
-            TellerEvent += data => Console.WriteLine("Data delivered");
+            TellerPacketEvent += packets => Log(@"{packets.Count}개의 거래 조회 완료...");
         }
 
         // 자동 반복 타이머 설정
@@ -53,6 +56,10 @@ namespace BankSeeker.Lib
         public Teller SetTimerInterval(uint sec)
         {
             timer.Interval = (double)(sec * 1000);
+            if (seeker != null)
+            {
+                seeker.SetTimeoutSeconds((uint)(timer.Interval / 1000));
+            }
             return this;
         }
         public Teller SetTimerEnabled(bool enabled)
@@ -65,6 +72,24 @@ namespace BankSeeker.Lib
             SetTimerInterval(60); // 기본 1분
             SetTimerEnabled(false);
             timer.Elapsed += async (object sender, ElapsedEventArgs e) => await Fetch();
+        }
+
+        // 로거
+        public delegate void TellerLogEventHandler(string log);
+        private event TellerLogEventHandler TellerLogEvent;
+        public Teller AttachLogger(TellerLogEventHandler handler)
+        {
+            TellerLogEvent += handler;
+            return this;
+        }
+        public void Log(string log)
+        {
+            if (TellerLogEvent != null)
+            {
+                TellerLogEvent(log);
+            } else {
+                Console.WriteLine(log);
+            }
         }
 
         // 초기화

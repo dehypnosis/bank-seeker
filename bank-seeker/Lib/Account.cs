@@ -15,6 +15,8 @@ namespace BankSeeker.Lib
         public string Number { get; set; } = null;
         public string UserId { get; set; } = null;
         public string Password { get; set; } = null;
+        public DateTime From { get; set; } = DateTime.Today;
+        public DateTime To { get; set; } = DateTime.Today;
 
         // 후에 Bank별로 추가정보가 필요하면 이 해시를 이용할 수 있겠음 
         public Dictionary<string, string> extra = new Dictionary<string, string>();
