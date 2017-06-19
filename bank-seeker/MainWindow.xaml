@@ -37,9 +37,9 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn SortDirection="Descending" Header="일자" Binding="{Binding Packet.Date, StringFormat={}{0:MM/dd hh:mm tt}}" />
                         <DataGridTextColumn Header="계좌" Binding="{Binding Account.Name}" />
-                        <DataGridTextColumn Header="출금자명" Binding="{Binding Packet.MyName}" />
+                        <DataGridTextColumn Header="출금자명" Binding="{Binding Packet.OutName}" />
                         <DataGridTextColumn Header="출금액" Binding="{Binding Packet.OutAmount, StringFormat=N0}" />
-                        <DataGridTextColumn Header="입금자명" Binding="{Binding Packet.YourName}" />
+                        <DataGridTextColumn Header="입금자명" Binding="{Binding Packet.InName}" />
                         <DataGridTextColumn Header="입금액" Binding="{Binding Packet.InAmount, StringFormat=N0}" />
                         <DataGridTextColumn Header="잔액" Binding="{Binding Packet.Balance, StringFormat=N0}" />
                         <DataGridTextColumn Header="구분" Binding="{Binding Packet.Type}" />

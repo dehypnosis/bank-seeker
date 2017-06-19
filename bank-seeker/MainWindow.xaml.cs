@@ -207,9 +207,9 @@ namespace BankSeeker
                 {
                     Date = DateTime.Now,
                     Note = "테스트",
-                    MyName = "내이름",
-                    YourName = "니이름",
+                    OutName = "내이름",
                     OutAmount = 0,
+                    InName = "니이름",
                     InAmount = 100000,
                     Balance = 130000,
                     Bank = "어디영업점",
@@ -224,8 +224,8 @@ namespace BankSeeker
                 {
                     Date = DateTime.Now,
                     Note = "테스트2",
-                    MyName = "내이름2",
-                    YourName = "니이름2",
+                    OutName = "내이름2",
+                    InName = "니이름2",
                     OutAmount = 0,
                     InAmount = 100000,
                     Balance = 230000,
@@ -241,8 +241,8 @@ namespace BankSeeker
                 {
                     Date = DateTime.Now,
                     Note = "테스트",
-                    MyName = "내이름",
-                    YourName = "니이름",
+                    OutName = "내이름",
+                    InName = "니이름",
                     OutAmount = 0,
                     InAmount = 100000,
                     Balance = 130000,

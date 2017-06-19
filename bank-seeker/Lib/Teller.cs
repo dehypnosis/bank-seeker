@@ -17,8 +17,8 @@ namespace BankSeeker.Lib
     {
         public DateTime Date { get; internal set; }
         public string Note { get; internal set; }
-        public string MyName { get; internal set; }
-        public string YourName { get; internal set; }
+        public string OutName { get; internal set; }
+        public string InName { get; internal set; }
         public decimal OutAmount { get; internal set; }
         public decimal InAmount { get; internal set; }
         public decimal Balance { get; internal set; }

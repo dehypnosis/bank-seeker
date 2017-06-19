@@ -254,7 +254,7 @@ namespace BankSeeker.Lib.Seekers
                                 {
                                     Date = Convert.ToDateTime(datetimeTemp),
                                     Note = tr.FindElement(By.CssSelector("td:nth-child(2)")).GetAttribute("textContent").Trim(),
-                                    MyName = tr.FindElement(By.CssSelector("td:nth-child(3)")).GetAttribute("textContent").Trim(),
+                                    OutName = tr.FindElement(By.CssSelector("td:nth-child(3)")).GetAttribute("textContent").Trim(),
                                     OutAmount = Convert.ToDecimal(tr.FindElement(By.CssSelector("td:nth-child(4)")).GetAttribute("textContent").Trim()),
                                     InAmount = Convert.ToDecimal(tr.FindElement(By.CssSelector("td:nth-child(5)")).GetAttribute("textContent").Trim()),
                                     Balance = Convert.ToDecimal(tr.FindElement(By.CssSelector("td:nth-child(6)")).GetAttribute("textContent").Trim()),
@@ -265,7 +265,7 @@ namespace BankSeeker.Lib.Seekers
                             }
                             else
                             {
-                                packets[(i - 1) / 2].YourName = tr.GetAttribute("textContent").Trim();
+                                packets[(i - 1) / 2].InName = tr.GetAttribute("textContent").Trim();
                             }
                         }
 
