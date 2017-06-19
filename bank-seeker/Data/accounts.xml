@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAccount xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="0" />
+  <Account Name="테스트2" IntervalMins="0" Bank.Code="NH" Number="1234" UserId="12314" Password="1234" DateRangeDays="0" />
+</ArrayOfAccount>

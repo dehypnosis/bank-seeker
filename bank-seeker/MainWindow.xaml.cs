@@ -49,7 +49,6 @@ namespace BankSeeker
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             viewModel.LoadData();
-            viewModel.SaveData();
 
             // 로깅시 스크롤 내림
             Teller.TellerLogEvent += log => Dispatcher.Invoke(new Action(() => LogScrollViewer.ScrollToEnd()));
@@ -61,7 +60,7 @@ namespace BankSeeker
 
             // 도움말 파일 로드
             var textRange = new TextRange(HelpTextBox.Document.ContentStart, HelpTextBox.Document.ContentEnd);
-            using (var fileStream = new System.IO.FileStream("help.rtf", System.IO.FileMode.Open))
+            using (var fileStream = new System.IO.FileStream(@"./data/readme.rtf", System.IO.FileMode.Open))
                 textRange.Load(fileStream, System.Windows.DataFormats.Rtf);
         }
 
@@ -110,6 +109,12 @@ namespace BankSeeker
         private void PackageCallback_Click(object sender, RoutedEventArgs e)
         {
             viewModel.Callback((Package)((Button)sender).Tag);
+        }
+
+        private void ClearPackages_Click(object sender, RoutedEventArgs e)
+        {
+            if (Confirm("정말 삭제하시겠습니까?"))
+                viewModel.ClearPackages();
         }
 
         private bool Confirm(string message)

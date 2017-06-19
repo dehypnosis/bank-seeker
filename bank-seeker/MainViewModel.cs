@@ -15,6 +15,58 @@ namespace BankSeeker
 
     public class MainViewModel : INotifyPropertyChanged
     {
+        // 설정 모델
+        public class ConfigureModel : INotifyPropertyChanged
+        {
+            public event PropertyChangedEventHandler PropertyChanged;
+            private void Update(string property)
+            {
+                if (PropertyChanged != null)
+                    PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+
+            private string callbackURL = "https://benzen.io/json.php";
+            public string CallbackURL
+            {
+                get
+                {
+                    return callbackURL;
+                }
+                set
+                {
+                    callbackURL = value;
+                    Update("CallbackURL");
+                }
+            }
+            private string callbackSecret = "ANY_SECRET_KEY";
+            public string CallbackSecret
+            {
+                get
+                {
+                    return callbackSecret;
+                }
+                set
+                {
+                    callbackSecret = value;
+                    Update("CallbackSecret");
+                }
+            }
+            private bool callbackAutomatic = true;
+            public bool CallbackAutomatic
+            {
+                get
+                {
+                    return callbackAutomatic;
+                }
+                set
+                {
+                    callbackAutomatic = value;
+                    Update("CallbackAutomatic");
+                }
+            }
+        }
+
+        // 메인 윈도우 뷰모델 속성들
         public event PropertyChangedEventHandler PropertyChanged;
         private void Update(string property)
         {
@@ -22,130 +74,92 @@ namespace BankSeeker
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
+        private ConfigureModel configure;
+        public ConfigureModel Configure {
+            get
+            {
+                return configure;
+            }
+            set
+            {
+                configure = value;
+                Update("Configure");
+            }
+        }
+
         public void LoadData()
         {
-
-        }
-
-        // <summary>은행 타입 및 이름, <cref="Seeker">해당 파서의 타입</cref></summary>
-        public class BB
-        {
-            public string Code { get; set; }
-            public string Name { get; set; }
-            public System.Type SeekerType { get; set; }
-
-            public static List<BB> Banks = new List<BB>()
+            try
             {
-                new BB {Code = "KB", Name = "국민은행", SeekerType = typeof(Lib.Seekers.SeekerKB)},
-                new BB {Code = "NH", Name = "농협중앙회", SeekerType = typeof(Lib.Seekers.SeekerNH)},
-            };
-
-            public static BB ByCode(string code)
-            {
-                return Banks.Find(new Predicate<BB>(bank => bank.Code == code));
+                XmlSerializer xs = new XmlSerializer(typeof(ConfigureModel));
+                using (StreamReader rd = new StreamReader(@"./data/configure.xml"))
+                {
+                    Configure = xs.Deserialize(rd) as ConfigureModel;
+                }
             }
-        }
-        public class ABC
-        {
-            public string Name { get; set; } = "이름 없음";
-            public BB Bank { get; set; } = null;
-
-        }
-
-        public void SaveData()
-        {
-            XmlSerializer xs = new XmlSerializer(typeof(ABC));
-            using (StreamWriter wr = new StreamWriter("customers.xml"))
+            catch (Exception)
             {
-                xs.Serialize(wr, new ABC() { Name="Test"});
+                Configure = new ConfigureModel();
             }
-        }
+            if (Accounts == null) Accounts = new ObservableCollection<Account>();
 
-        public MainViewModel()
-        {
-            // 계좌 초기화
-            Accounts.Add(new Account
+            try
             {
-                Name = "국민계좌",
-                IntervalMins = 1,
-                Bank = Bank.ByCode("KB"),
-                Number = "957502-01-427751",
-                UserId = "YEO7311",
-                Password = "1524",
-                From = DateTime.Today.AddDays(-4),
-            });
-            Accounts.Add(new Account
+                XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<Account>));
+                using (StreamReader rd = new StreamReader(@"./data/accounts.xml"))
+                {
+                    Accounts = xs.Deserialize(rd) as ObservableCollection<Account>;
+                }
+            }
+            catch (Exception)
             {
-                Name = "농협계좌",
-                IntervalMins = 0,
-                Bank = Bank.ByCode("NH"),
-                Number = "957502-01-427752",
-                UserId = "YEO7331",
-                Password = "777",
-                From = DateTime.Today.AddDays(-2)
-            });
+                Accounts = new ObservableCollection<Account>();
+            }
+            if (Accounts == null) Accounts = new ObservableCollection<Account>();
             if (Accounts.Count > 0)
             {
                 SelectedAccount = Accounts[0];
             }
 
-            // 콜백 초기화
-            CallbackURL = "https://benzen.io/json.php";
-            CallbackSecret = "ANY_STRING";
-            callbackAutomatic = true;
+            try
+            {
+                var xs = new XmlSerializer(typeof(ObservableCollection<Package>));
+                using (StreamReader rd = new StreamReader(@"./data/packages.xml"))
+                {
+                    Packages = xs.Deserialize(rd) as ObservableCollection<Package>;
+                }
+            }
+            catch (Exception)
+            {
+                Packages = new ObservableCollection<Package>();
+            }
+            if (Packages == null) Packages = new ObservableCollection<Package>();
+        }
 
-            // 조회 내역 초기화
-            Packages.Add(new Package()
+        public void SaveData()
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(ConfigureModel));
+            using (StreamWriter wr = new StreamWriter(@"./data/configure.xml"))
             {
-                Hash = "1",
-                Account = Accounts[0],
-                Packet = new Packet()
-                {
-                    Date = DateTime.Now,
-                    Note = "테스트",
-                    OutName = "내이름",
-                    OutAmount = 0,
-                    InName = "니이름",
-                    InAmount = 100000,
-                    Balance = 130000,
-                    Bank = "어디영업점",
-                    Type = null
-                }
-            });
-            Packages.Add(new Package()
+                xs.Serialize(wr, Configure);
+            }
+
+            xs = new XmlSerializer(typeof(ObservableCollection<Account>));
+            using (StreamWriter wr = new StreamWriter(@"./data/accounts.xml"))
             {
-                Hash = "2",
-                Account = Accounts[0],
-                Packet = new Packet()
-                {
-                    Date = DateTime.Now,
-                    Note = "테스트2",
-                    OutName = "내이름2",
-                    InName = "니이름2",
-                    OutAmount = 0,
-                    InAmount = 100000,
-                    Balance = 230000,
-                    Bank = "어디영업점2",
-                    Type = null
-                }
-            });
-            Packages.Add(new Package()
+                xs.Serialize(wr, Accounts);
+            }
+
+            xs = new XmlSerializer(typeof(ObservableCollection<Package>));
+            using (StreamWriter wr = new StreamWriter(@"./data/packages.xml"))
             {
-                Hash = "3",
-                Account = Accounts[0],
-                Packet = new Packet()
-                {
-                    Date = DateTime.Now,
-                    Note = "테스트",
-                    OutName = "내이름",
-                    InName = "니이름",
-                    OutAmount = 0,
-                    InAmount = 100000,
-                    Balance = 130000,
-                    Bank = "어디영업점",
-                    Type = null
-                }
-            });
+                xs.Serialize(wr, Packages);
+            }
+        }
+
+        public MainViewModel()
+        {
+            // 조회 내역 처리
             Teller.TellerPackageEvent += packages =>
             {
                 Application.Current.Dispatcher.Invoke(new Action(() =>
@@ -161,6 +175,7 @@ namespace BankSeeker
                             Callback(pack);
                         }
                     }
+                    Update("Packages");
                 }));
             };
             Teller.TellerStopEvent += () =>
@@ -168,7 +183,7 @@ namespace BankSeeker
                 IsFetching = false;
             };
 
-            // 로깅 초기화
+            // 로그 처리
             Teller.TellerLogEvent += log =>
             {
                 Log += $"\n[{DateTime.Now.ToString()}] {log}";
@@ -177,7 +192,20 @@ namespace BankSeeker
         }
 
         // 계좌
-        public ObservableCollection<Account> Accounts { get; } = new ObservableCollection<Account>();
+        private ObservableCollection<Account> accounts;
+        public ObservableCollection<Account> Accounts {
+            get
+            {
+                return accounts;
+            }
+            set
+            {
+                accounts = value;
+                Update("Accounts");
+            }
+        }
+
+
         private Account selectedAccount = null;
         public Account SelectedAccount
         {
@@ -255,45 +283,32 @@ namespace BankSeeker
         }
 
         // 조회 및 콜백 내역 (패키지)
-        public ObservableCollection<Package> Packages { get; } = new ObservableCollection<Package>();
+        private ObservableCollection<Package> packages;
+        public ObservableCollection<Package> Packages
+        {
+            get
+            {
+                return packages;
+            }
+            set
+            {
+                packages = value;
+                Update("Packages");
+            }
+        }
+        public void ClearPackages()
+        {
+            Packages.Clear();
+        }
 
         // 로깅
         public string Log { get; private set; }
 
-        private string callbackURL;
-        public string CallbackURL
-        {
-            get { return callbackURL; }
-            set
-            {
-                callbackURL = value;
-                Update("CallbackURL");
-            }
-        }
-        private string callbackSecret;
-        public string CallbackSecret
-        {
-            get { return callbackSecret; }
-            set
-            {
-                callbackSecret = value;
-                Update("CallbackSecret");
-            }
-        }
-        private bool callbackAutomatic;
-        public bool CallbackAutomatic
-        {
-            get { return callbackAutomatic; }
-            set
-            {
-                callbackAutomatic = value;
-                Update("CallbackAutomatic");
-            }
-        }
+        // 콜백
         public void Callback(Package package)
         {
-            if (CallbackAutomatic)
-                teller.Callback(package, CallbackURL, CallbackSecret);
+            if (Configure.CallbackAutomatic)
+                teller.Callback(package, Configure.CallbackURL, Configure.CallbackSecret);
 
             var index = Packages.IndexOf(package);
             if (index == -1)

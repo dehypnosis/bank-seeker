@@ -29,38 +29,48 @@
 
         <TabControl Margin="10" VerticalContentAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
             <TabItem Header="실행 내역" Padding="5">
-                <DataGrid
-                    x:Name="PackagesGrid"
-                    ItemsSource="{Binding Packages}"
-                    Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" IsReadOnly="True"
-                    Background="{x:Null}" BorderBrush="{x:Null}" AutoGenerateColumns="False" GridLinesVisibility="None" FontSize="14">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn SortDirection="Descending" Header="일자" Binding="{Binding Packet.Date, StringFormat={}{0:MM/dd hh:mm tt}}" />
-                        <DataGridTextColumn Header="계좌" Binding="{Binding Account.Name}" />
-                        <DataGridTextColumn Header="출금자명" Binding="{Binding Packet.OutName}" />
-                        <DataGridTextColumn Header="출금액" Binding="{Binding Packet.OutAmount, StringFormat=N0}" />
-                        <DataGridTextColumn Header="입금자명" Binding="{Binding Packet.InName}" />
-                        <DataGridTextColumn Header="입금액" Binding="{Binding Packet.InAmount, StringFormat=N0}" />
-                        <DataGridTextColumn Header="잔액" Binding="{Binding Packet.Balance, StringFormat=N0}" />
-                        <DataGridTextColumn Header="구분" Binding="{Binding Packet.Type}" />
-                        <DataGridTextColumn Header="적요" Binding="{Binding Packet.Note}" />
-                        <DataGridTextColumn Header="영업점" Binding="{Binding Packet.Bank}" />
-                        <DataGridTemplateColumn Header="콜백">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button Content="호출" Padding="2,0,2,0" Click="PackageCallback_Click" Tag="{Binding}" Background="{x:Null}" BorderBrush="White" />
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="응답" Binding="{Binding CallbackResult, Mode=OneWay}" />
-                    </DataGrid.Columns>
-                    <DataGrid.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                        </Style>
-                    </DataGrid.CellStyle>
-                </DataGrid>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="45"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid
+                        Grid.Row="0"
+                        x:Name="PackagesGrid"
+                        ItemsSource="{Binding Packages}"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,0" IsReadOnly="True"
+                        Background="{x:Null}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" AutoGenerateColumns="False" GridLinesVisibility="None" FontSize="14">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="콜백">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="호출" Padding="2,0,2,0" Click="PackageCallback_Click" Tag="{Binding}" Background="{x:Null}" BorderBrush="White" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="응답" Binding="{Binding CallbackResult, Mode=OneWay}" />
+                            <DataGridTextColumn SortDirection="Descending" Header="일자" Binding="{Binding Packet.Date, StringFormat={}{0:MM/dd hh:mm tt}}" />
+                            <DataGridTextColumn Header="계좌" Binding="{Binding Account.Name}" />
+                            <DataGridTextColumn Header="출금자명" Binding="{Binding Packet.OutName}" />
+                            <DataGridTextColumn Header="출금액" Binding="{Binding Packet.OutAmount, StringFormat=N0}" />
+                            <DataGridTextColumn Header="입금자명" Binding="{Binding Packet.InName}" />
+                            <DataGridTextColumn Header="입금액" Binding="{Binding Packet.InAmount, StringFormat=N0}" />
+                            <DataGridTextColumn Header="잔액" Binding="{Binding Packet.Balance, StringFormat=N0}" />
+                            <DataGridTextColumn Header="구분" Binding="{Binding Packet.Type}" />
+                            <DataGridTextColumn Header="적요" Binding="{Binding Packet.Note}" />
+                            <DataGridTextColumn Header="영업점" Binding="{Binding Packet.Bank}" />
+                        </DataGrid.Columns>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            </Style>
+                        </DataGrid.CellStyle>
+                    </DataGrid>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button Margin="10" Content="내역 전체 삭제" Padding="10,0,10,0" Height="25" Click="ClearPackages_Click" IsEnabled="{Binding IsNotFetching}" />
+                    </StackPanel>
+                </Grid>
             </TabItem>
             <TabItem Header="도움말" Padding="5">
                 <ScrollViewer Margin="10">
@@ -179,19 +189,19 @@
                         <Label Content="콜백 URL" Width="80"/>
                         <TextBox 
                                 IsEnabled="{Binding IsNotFetching}"
-                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding CallbackURL}" Width="130"/>
+                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding Configure.CallbackURL}" Width="130"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Label Content="암호키" Width="80"/>
                         <TextBox 
                                 IsEnabled="{Binding IsNotFetching}"
-                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding CallbackSecret}" Width="130"/>
+                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding Configure.CallbackSecret}" Width="130"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                         <Label Content="자동 호출" Width="80"/>
                         <CheckBox
                                 IsEnabled="{Binding IsNotFetching}"
-                                Margin="0,7,0,0"  IsChecked="{Binding CallbackAutomatic}"/>
+                                Margin="0,7,0,0"  IsChecked="{Binding Configure.CallbackAutomatic}"/>
                     </StackPanel>
                 </StackPanel>
             </TabItem>

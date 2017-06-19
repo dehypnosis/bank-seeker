@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConfigureModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CallbackURL>https://benzen.io/json.php</CallbackURL>
+  <CallbackSecret>ANY_SECRET_KEY</CallbackSecret>
+  <CallbackAutomatic>true</CallbackAutomatic>
+</ConfigureModel>
