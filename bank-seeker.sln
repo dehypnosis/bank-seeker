@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bank-seeker", "bank-seeker\bank-seeker.csproj", "{BAC4839E-FE5F-40CF-926B-C98C018EF7B9}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "bank-seeker-setup", "bank-seeker-setup\bank-seeker-setup.vdproj", "{DBEB82EB-9756-47C6-9C47-4C981FB3F456}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +24,10 @@ Global
 		{BAC4839E-FE5F-40CF-926B-C98C018EF7B9}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{BAC4839E-FE5F-40CF-926B-C98C018EF7B9}.Release|x64.ActiveCfg = Release|x64
 		{BAC4839E-FE5F-40CF-926B-C98C018EF7B9}.Release|x64.Build.0 = Release|x64
+		{DBEB82EB-9756-47C6-9C47-4C981FB3F456}.Debug|Any CPU.ActiveCfg = Debug
+		{DBEB82EB-9756-47C6-9C47-4C981FB3F456}.Debug|x64.ActiveCfg = Debug
+		{DBEB82EB-9756-47C6-9C47-4C981FB3F456}.Release|Any CPU.ActiveCfg = Release
+		{DBEB82EB-9756-47C6-9C47-4C981FB3F456}.Release|x64.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

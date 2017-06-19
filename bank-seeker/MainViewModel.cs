@@ -1,4 +1,5 @@
-﻿using BankSeeker.Lib;
+﻿using BankSeeker.Helper;
+using BankSeeker.Lib;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -92,7 +93,7 @@ namespace BankSeeker
             try
             {
                 XmlSerializer xs = new XmlSerializer(typeof(ConfigureModel));
-                using (StreamReader rd = new StreamReader(@"./data/configure.xml"))
+                using (StreamReader rd = new StreamReader(ContentManager.getPath("configure.xml")))
                 {
                     Configure = xs.Deserialize(rd) as ConfigureModel;
                 }
@@ -106,7 +107,7 @@ namespace BankSeeker
             try
             {
                 XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<Account>));
-                using (StreamReader rd = new StreamReader(@"./data/accounts.xml"))
+                using (StreamReader rd = new StreamReader(ContentManager.getPath("accounts.xml")))
                 {
                     Accounts = xs.Deserialize(rd) as ObservableCollection<Account>;
                 }
@@ -124,7 +125,7 @@ namespace BankSeeker
             try
             {
                 var xs = new XmlSerializer(typeof(ObservableCollection<Package>));
-                using (StreamReader rd = new StreamReader(@"./data/packages.xml"))
+                using (StreamReader rd = new StreamReader(ContentManager.getPath("packages.xml")))
                 {
                     Packages = xs.Deserialize(rd) as ObservableCollection<Package>;
                 }
@@ -139,19 +140,19 @@ namespace BankSeeker
         public void SaveData()
         {
             XmlSerializer xs = new XmlSerializer(typeof(ConfigureModel));
-            using (StreamWriter wr = new StreamWriter(@"./data/configure.xml"))
+            using (StreamWriter wr = new StreamWriter(ContentManager.getPath("configure.xml")))
             {
                 xs.Serialize(wr, Configure);
             }
 
             xs = new XmlSerializer(typeof(ObservableCollection<Account>));
-            using (StreamWriter wr = new StreamWriter(@"./data/accounts.xml"))
+            using (StreamWriter wr = new StreamWriter(ContentManager.getPath("accounts.xml")))
             {
                 xs.Serialize(wr, Accounts);
             }
 
             xs = new XmlSerializer(typeof(ObservableCollection<Package>));
-            using (StreamWriter wr = new StreamWriter(@"./data/packages.xml"))
+            using (StreamWriter wr = new StreamWriter(ContentManager.getPath("packages.xml")))
             {
                 xs.Serialize(wr, Packages);
             }

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,8 +11,18 @@ using System.Windows.Controls;
 
 namespace BankSeeker.Helper
 {
-    // For Save User Data
-
+    public static class ContentManager
+    {
+#if DEBUG
+        public static string AppDataPath = @"./Data";
+# else
+        public static string AppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Benzen/BankSeeker/Data");
+#endif
+        public static string getPath(string filePath)
+        {
+            return Path.Combine(ContentManager.AppDataPath, filePath);
+        }
+    }
 
     // For Password Binding
     public static class PasswordBoxAssistant

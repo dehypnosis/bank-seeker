@@ -20,6 +20,7 @@ using System.Windows.Threading;
 using System.Threading;
 using static BankSeeker.Lib.Seeker;
 using System.Collections.Specialized;
+using BankSeeker.Helper;
 
 namespace BankSeeker
 {
@@ -60,7 +61,7 @@ namespace BankSeeker
 
             // 도움말 파일 로드
             var textRange = new TextRange(HelpTextBox.Document.ContentStart, HelpTextBox.Document.ContentEnd);
-            using (var fileStream = new System.IO.FileStream(@"./data/readme.rtf", System.IO.FileMode.Open))
+            using (var fileStream = new System.IO.FileStream(ContentManager.getPath("readme.rtf"), System.IO.FileMode.Open))
                 textRange.Load(fileStream, System.Windows.DataFormats.Rtf);
         }
 

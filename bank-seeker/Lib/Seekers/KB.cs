@@ -13,6 +13,7 @@ using DriverService = OpenQA.Selenium.PhantomJS.PhantomJSDriverService;
 using Shipwreck.Phash;
 using System.Collections.Generic;
 using OpenQA.Selenium.Interactions;
+using BankSeeker.Helper;
 
 namespace BankSeeker.Lib.Seekers
 {
@@ -95,7 +96,7 @@ namespace BankSeeker.Lib.Seekers
                 driver.FindElement(password).Click();
 
                 // save keypad image
-                var keypadImagePath = @"./Data/KB/KB_keypad.bmp";
+                var keypadImagePath = ContentManager.getPath(@"KB/KB_keypad.bmp");
                 var keypad = By.CssSelector(".keypadWrap img");
                 wait.Until(ExpectedConditions.ElementToBeClickable(keypad));
                 driver.GetScreenshot().SaveAsFile(keypadImagePath, ScreenshotImageFormat.Bmp);
@@ -133,11 +134,11 @@ namespace BankSeeker.Lib.Seekers
                     var GAMMA = 1.5;
                     var DEGREE = 180;
                     var solDigests = new Dictionary<string, Digest>() {
-                        {"num5", ImagePhash.ComputeDigest(@"./Data/KB/KB_keypad_sol_5.bmp", SIGMA, GAMMA, DEGREE) },
-                        {"num7", ImagePhash.ComputeDigest(@"./Data/KB/KB_keypad_sol_7.bmp", SIGMA, GAMMA, DEGREE) },
-                        {"num8", ImagePhash.ComputeDigest(@"./Data/KB/KB_keypad_sol_8.bmp", SIGMA, GAMMA, DEGREE) },
-                        {"num9", ImagePhash.ComputeDigest(@"./Data/KB/KB_keypad_sol_9.bmp", SIGMA, GAMMA, DEGREE) },
-                        {"num0", ImagePhash.ComputeDigest(@"./Data/KB/KB_keypad_sol_0.bmp", SIGMA, GAMMA, DEGREE) },
+                        {"num5", ImagePhash.ComputeDigest(ContentManager.getPath(@"KB/KB_keypad_sol_5.bmp"), SIGMA, GAMMA, DEGREE) },
+                        {"num7", ImagePhash.ComputeDigest(ContentManager.getPath(@"KB/KB_keypad_sol_7.bmp"), SIGMA, GAMMA, DEGREE) },
+                        {"num8", ImagePhash.ComputeDigest(ContentManager.getPath(@"KB/KB_keypad_sol_8.bmp"), SIGMA, GAMMA, DEGREE) },
+                        {"num9", ImagePhash.ComputeDigest(ContentManager.getPath(@"KB/KB_keypad_sol_9.bmp"), SIGMA, GAMMA, DEGREE) },
+                        {"num0", ImagePhash.ComputeDigest(ContentManager.getPath(@"KB/KB_keypad_sol_0.bmp"), SIGMA, GAMMA, DEGREE) },
                     };
 
                     // find each digit of btns by correlation with solution image
@@ -154,7 +155,7 @@ namespace BankSeeker.Lib.Seekers
                         }
 
                         // crop image
-                        var btnImagePath = @"./Data/KB/KB_keypad_" + btnLocation.Key + ".bmp";
+                        var btnImagePath = ContentManager.getPath($@"KB/KB_keypad_{btnLocation.Key}.bmp") ;
                         var rect = new Rectangle(btnLocation.Value.X - 22, btnLocation.Value.Y - 22, 44, 44);
                         using (var bitmap = new Bitmap(rect.Width, rect.Height))
                         using (var graphic = Graphics.FromImage(bitmap))
@@ -235,7 +236,7 @@ namespace BankSeeker.Lib.Seekers
                     for (var pageNum = 0; true; pageNum++)
                     {
                         Teller.Log($"[{account.Name}] {pageNum + 1} 페이지 파싱 및 분석...");
-                        driver.GetScreenshot().SaveAsFile($@"./Data/KB/KB_result_{pageNum}.bmp", ScreenshotImageFormat.Bmp);
+                        driver.GetScreenshot().SaveAsFile(ContentManager.getPath($@"KB/KB_result_{pageNum}.bmp"), ScreenshotImageFormat.Bmp);
 
                         var trs = driver.FindElementsByCssSelector(".tType01 tbody tr");
                         if (trs.Count < 2)
