@@ -22,5 +22,16 @@ namespace BankSeeker.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection 설정 {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["설정"]));
+            }
+            set {
+                this["설정"] = value;
+            }
+        }
     }
 }

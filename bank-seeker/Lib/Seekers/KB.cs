@@ -18,7 +18,7 @@ namespace BankSeeker.Lib.Seekers
 {
 
     // <summary>국민은행 파서</summary>
-    class SeekerKB : Seeker
+    public class SeekerKB : Seeker
     {
         // headless browser
         private DriverService driverService = null;

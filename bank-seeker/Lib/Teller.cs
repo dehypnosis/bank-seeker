@@ -15,24 +15,24 @@ namespace BankSeeker.Lib
     // raw data
     public class Packet
     {
-        public DateTime Date { get; internal set; }
-        public string Note { get; internal set; }
-        public string OutName { get; internal set; }
-        public string InName { get; internal set; }
-        public decimal OutAmount { get; internal set; }
-        public decimal InAmount { get; internal set; }
-        public decimal Balance { get; internal set; }
-        public string Bank { get; internal set; }
-        public string Type { get; internal set; }
+        public DateTime Date { get; set; }
+        public string Note { get; set; }
+        public string OutName { get; set; }
+        public string InName { get; set; }
+        public decimal OutAmount { get; set; }
+        public decimal InAmount { get; set; }
+        public decimal Balance { get; set; }
+        public string Bank { get; set; }
+        public string Type { get; set; }
     }
 
     // 암호화 및 정제된 데이터
     public class Package
     {
-        public Packet Packet { get; internal set; }
-        public Account Account { get; internal set; }
-        public string Hash { get; internal set; }
-        public string CallbackResult { get; internal set; }
+        public Packet Packet { get; set; }
+        public Account Account { get; set; }
+        public string Hash { get; set; }
+        public string CallbackResult { get; set; }
     }
 
     // <summary>계좌 및 타이머를 설정하고, <see cref="Seeker">은행별 파서</see>를 생성 및 실행하고 이벤트 발행/구독 인터페이스 제공</summary>

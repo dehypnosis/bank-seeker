@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankSeeker.Lib.Seekers
 {
-    class SeekerNH : Seeker
+    public class SeekerNH : Seeker
     {
         protected override List<Packet> FetchPackets(Account account)
         {

@@ -12,7 +12,7 @@ namespace BankSeeker.Lib
     {
         public string Code { get; set; }
         public string Name { get; set; }
-        public System.Type SeekerType;
+        public System.Type SeekerType { get; set; }
 
         public static List<Bank> Banks = new List<Bank>()
         {
@@ -20,7 +20,7 @@ namespace BankSeeker.Lib
             new Bank {Code = "NH", Name = "농협중앙회", SeekerType = typeof(Seekers.SeekerNH)},
         };
 
-        internal static Bank ByCode(string code)
+        public static Bank ByCode(string code)
         {
             return Banks.Find(new Predicate<Bank>(bank => bank.Code == code));
         }
