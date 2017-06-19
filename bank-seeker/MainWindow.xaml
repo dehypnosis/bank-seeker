@@ -5,92 +5,199 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankSeeker"
+        xmlns:helper="clr-namespace:BankSeeker.Helper"
         mc:Ignorable="d"
-        Title="BankSeeker" Height="540" Width="720" HorizontalAlignment="Center" MinWidth="280" MinHeight="480">
+        Title="BankSeeker" Height="670" Width="1100" HorizontalAlignment="Center" MinWidth="280" MinHeight="550">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="260"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="510"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Margin="10" Grid.Row="2" Grid.ColumnSpan="2">
             <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
-                <ScrollViewer Grid.Row="1" Grid.Column="1" Padding="5">
-                    <TextBlock TextWrapping="Wrap" VerticalAlignment="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True"><Span Foreground="Black"><Run Text="웹 페이지를 초기화..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="로딩이 끝나기를 기다림..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="계좌 정보 입력중..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="비밀번호 키패드 이미지 추출..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="번호별로 이미지 추출, 해싱을 통해 상관관계 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num7 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="예외 발생: 'System.ArgumentException'(mscorlib.dll)"/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="xxx3를 확정 할 수 없음... 재시작"/></Span><LineBreak/><Span Foreground="Black"><Run Text="웹 페이지를 초기화..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="로딩이 끝나기를 기다림..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="계좌 정보 입력중..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="비밀번호 키패드 이미지 추출..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="번호별로 이미지 추출, 해싱을 통해 상관관계 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num0 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num9 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num8 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num7 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num1 (136, 85) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 (192, 145) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num2 (192, 85) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num4 (136, 145) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="확인 (192, 315) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="1 페이지 파싱 및 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="1 페이지 거래 내역 없음. 파서 종료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="웹 페이지를 초기화..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="로딩이 끝나기를 기다림..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="계좌 정보 입력중..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="비밀번호 키패드 이미지 추출..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="번호별로 이미지 추출, 해싱을 통해 상관관계 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num9 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num7 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num0 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num8 분석 완료..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num1 (136, 85) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num5 (192, 145) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num2 (192, 85) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="num4 (136, 145) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="확인 (192, 315) 클릭..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="1 페이지 파싱 및 분석..."/></Span><LineBreak/><Span Foreground="Black"><Run Text="1 페이지 거래 내역 없음. 파서 종료..."/><InlineUIContainer></InlineUIContainer></Span></TextBlock>
+                <ScrollViewer x:Name="LogScrollViewer" Grid.Row="1" Grid.Column="1" Padding="5">
+                    <TextBlock Text="{Binding Log, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
+                    </TextBlock>
                 </ScrollViewer>
             </Border>
         </Grid>
 
 
-
         <TabControl Margin="10" VerticalContentAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
-            <TabItem Header="거래 조회 내역" Padding="5">
-                <DataGrid Margin="5" BorderBrush="{x:Null}" Background="{x:Null}"/>
-            </TabItem>
-            <TabItem Header="콜백 설정" Padding="5">
-                <DataGrid Margin="5" BorderBrush="{x:Null}" Background="{x:Null}"/>
+            <TabItem Header="실행 내역" Padding="5">
+                <DataGrid
+                    x:Name="PackagesGrid"
+                    ItemsSource="{Binding Packages}"
+                    Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10" IsReadOnly="True"
+                    Background="{x:Null}" BorderBrush="{x:Null}" AutoGenerateColumns="False" GridLinesVisibility="None" FontSize="14">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn SortDirection="Descending" Header="일자" Binding="{Binding Packet.Date, StringFormat={}{0:MM/dd hh:mm tt}}" />
+                        <DataGridTextColumn Header="계좌" Binding="{Binding Account.Name}" />
+                        <DataGridTextColumn Header="출금자명" Binding="{Binding Packet.MyName}" />
+                        <DataGridTextColumn Header="출금액" Binding="{Binding Packet.OutAmount, StringFormat=N0}" />
+                        <DataGridTextColumn Header="입금자명" Binding="{Binding Packet.YourName}" />
+                        <DataGridTextColumn Header="입금액" Binding="{Binding Packet.InAmount, StringFormat=N0}" />
+                        <DataGridTextColumn Header="잔액" Binding="{Binding Packet.Balance, StringFormat=N0}" />
+                        <DataGridTextColumn Header="구분" Binding="{Binding Packet.Type}" />
+                        <DataGridTextColumn Header="적요" Binding="{Binding Packet.Note}" />
+                        <DataGridTextColumn Header="영업점" Binding="{Binding Packet.Bank}" />
+                        <DataGridTemplateColumn Header="콜백">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="호출" Padding="2,0,2,0" Click="PackageCallback_Click" Tag="{Binding}" Background="{x:Null}" BorderBrush="White" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="응답" Binding="{Binding CallbackResult, Mode=OneWay}" />
+                    </DataGrid.Columns>
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        </Style>
+                    </DataGrid.CellStyle>
+                </DataGrid>
             </TabItem>
             <TabItem Header="도움말" Padding="5">
-                <RichTextBox Margin="5" BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly ="True">
-                    <RichTextBox.Resources>
-                        <Style TargetType="{x:Type Paragraph}">
-                            <Setter Property="Margin" Value="0"/>
-                        </Style>
-                    </RichTextBox.Resources>
-                    <FlowDocument>
-                        <Paragraph>
-                            <Run Text="도움을 드리고자.."/>
-                        </Paragraph>
-                        <Paragraph>
-                            <Run Text="어쩌구 저저구.."/>
-                        </Paragraph>
-                        <Paragraph>
-                            <Run/>
-                        </Paragraph>
-                    </FlowDocument>
-                </RichTextBox>
+                <ScrollViewer Margin="10">
+                    <RichTextBox BorderBrush="{x:Null}" BorderThickness="0" IsReadOnly ="True" x:Name="HelpTextBox">
+                        <RichTextBox.Resources>
+                            <Style TargetType="{x:Type Paragraph}">
+                                <Setter Property="Margin" Value="0"/>
+                            </Style>
+                        </RichTextBox.Resources>
+                    </RichTextBox>
+                </ScrollViewer>
+            </TabItem>
+
+        </TabControl>
+        <TabControl Grid.Column="1"  Margin="10" VerticalContentAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+            <TabItem Header="계좌 설정" Padding="5">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                        <ListBox 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                ItemsSource="{Binding Accounts}" Height="68" SelectedItem="{Binding SelectedAccount}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Grid.Column="0">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="[{0}] {1}">
+                                                    <Binding Path="Bank.Name" />
+                                                    <Binding Path="Name" />
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
+                            <Button 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Content="추가" Padding="5" Margin="0,0,5,0" Click="AddAccount_Click" />
+                            <Button 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Content="삭제" Padding="5" Visibility="{Binding SelectedAccountVisibility}" Click="RemoveAccount_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,10"
+                                Visibility="{Binding DataContext.SelectedAccountVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                DataContext="{Binding SelectedAccount}">
+                        <Separator Margin="0,0,0,10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="이름" Width="80"/>
+                            <TextBox 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Height="23" TextWrapping="NoWrap" AcceptsReturn="False"  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="은행" Width="80"/>
+                            <ComboBox
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                ItemsSource="{Binding DataContext.Banks, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                SelectedItem="{Binding Bank}"
+                                DisplayMemberPath="Name"
+                                SelectedValuePath="Code">
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="계좌번호" Width="80"/>
+                            <TextBox 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding Number}" Width="120"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="아이디" Width="80"/>
+                            <TextBox 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding UserId}" Width="120"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="비밀번호" Width="80"/>
+                            <PasswordBox 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Height="23" Width="120" Password=""
+                                helper:PasswordBoxAssistant.BindPassword="true"
+                                helper:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="시작 일자" Width="80"/>
+                            <DatePicker 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Margin="0,0,0,0" SelectedDate="{Binding From}" x:Name="AccountFrom" FirstDayOfWeek="Monday" Width="100" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="종료 일자" Width="80"/>
+                            <DatePicker 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Margin="0,0,0,0" SelectedDate="{Binding To}" x:Name="AccountTo" FirstDayOfWeek="Monday" Width="100" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="반복 간격" Width="80"/>
+                            <Slider
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Width="70" Height="18" Minimum="0" Maximum="60" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding IntervalMins}" />
+                            <Label Content="{Binding IntervalMins}" ContentStringFormat="{}{0}분"/>
+                        </StackPanel>
+                        <Button Content="거래 내역 조회" Height="25" Click="Fetch_Click" Visibility="{Binding DataContext.VisibleWhenNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+                        <Button Content="중지" Height="25" Click="Stop_Click"
+                                IsEnabled="{Binding DataContext.CanStop, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Visibility="{Binding DataContext.VisibleWhenFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="콜백 설정" Padding="5">
+
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Content="콜백 URL" Width="80"/>
+                        <TextBox 
+                                IsEnabled="{Binding IsNotFetching}"
+                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding CallbackURL}" Width="130"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Content="암호키" Width="80"/>
+                        <TextBox 
+                                IsEnabled="{Binding IsNotFetching}"
+                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding CallbackSecret}" Width="130"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <Label Content="자동 호출" Width="80"/>
+                        <CheckBox
+                                IsEnabled="{Binding IsNotFetching}"
+                                Margin="0,7,0,0"  IsChecked="{Binding CallbackAutomatic}"/>
+                    </StackPanel>
+                </StackPanel>
             </TabItem>
         </TabControl>
-        <StackPanel Grid.Column="1" Margin="10">
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Label Content="은행" Width="80"/>
-                <ComboBox SelectedIndex="0" >
-                    <ComboBoxItem>국민은행</ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Label Content="계좌번호" Width="80"/>
-                <TextBox Height="23" TextWrapping="Wrap" Text="957502-01-427751" Width="120"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Label Content="아이디" Width="80"/>
-                <TextBox Height="23" TextWrapping="Wrap" Text="YEO7311" Width="120"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Label Content="비밀번호" Width="80"/>
-                <PasswordBox Height="23" Width="120" Password="1234"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Label Content="시작 일자" Width="80"/>
-                <DatePicker Margin="0,0,0,0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Label Content="종료 일자" Width="80"/>
-                <DatePicker Margin="0,0,0,0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Label Content="자동 반복" Width="80"/>
-                <CheckBox Content="활성화" Height="14"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Label Content="반복 간격(s)" Width="80"/>
-                <Slider Width="100" Height="18"/>
-            </StackPanel>
-            <Button Content="실행" Height="25" />
-        </StackPanel>
+
+
     </Grid>
 
 </Window>

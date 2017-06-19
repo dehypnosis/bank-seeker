@@ -8,54 +8,36 @@ using System.Threading.Tasks;
 namespace BankSeeker.Lib
 {
     // <summary>은행별 파서의 인터페이스 및 데이터 구조, Fetch 호출시 서비스의 도움을 받아서 비동기로 데이터를 파싱하고 포맷에 맞게 변환</summary>
-    abstract class Seeker
+    abstract public class Seeker : IDisposable
     {
-        public class Packet
-        {
-            public DateTime datetime { get; set; }
-            public string note { get; set; }
-            public string myName { get; set; }
-            public string yourName { get; set; }
-            public decimal outAmount { get; set; }
-            public decimal inAmount { get; set; }
-            public decimal balance { get; set; }
-            public string bank { get; set; }
-            public string type { get; set; }
-        }
+        protected class NeedToRefetchError : Exception { }
+        protected abstract List<Packet> FetchPackets(Account account);
 
-        private Teller teller;
-        internal void setTeller(Teller teller)
+        // 파서별로 조회된 내역을 암호화 및 중복 체크 로직으로 래핑
+        public List<Package> Fetch(Account account)
         {
-            this.teller = teller;
-        }
-
-        public void Log(object log)
-        {
-            this.teller.Log(Convert.ToString(log));
-        }
-
-        protected uint TimeoutSeconds;
-        public void SetTimeoutSeconds(uint sec)
-        {
-            TimeoutSeconds = sec;
-        }
-
-        public abstract Task<List<Packet>> Fetch(Account account); // 구현시 비동기 한정자 필요
-    }
-
-    namespace Seekers
-    {
-        // 더미용 파서
-        class NotImplemented : Seeker
-        {
-            public NotImplemented()
+            try
             {
-                throw new NotImplementedException();
-            }
-            public override Task<List<Packet>> Fetch(Account account)
+                var packets = FetchPackets(account);
+                if (packets == null) return null;
+
+                var packages = packets.ConvertAll<Package>(new Converter<Packet, Package>(packet =>
+                {
+                    return new Package
+                    {
+                        Packet = packet,
+                        Account = account,
+                        Hash = "" + (uint)(packet.Date + "" + packet.Balance).GetHashCode()
+                    };
+                }));
+
+                return packages;
+            } catch (NeedToRefetchError)
             {
-                throw new NotImplementedException();
+                return Fetch(account);
             }
         }
+
+        public abstract void Dispose();
     }
 }

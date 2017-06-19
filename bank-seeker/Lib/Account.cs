@@ -10,8 +10,19 @@ namespace BankSeeker.Lib
     // <summary>파싱 할 계좌 정보</summary>
     public class Account
     {
-        public Bank.Type? BankType { get; set; }
-        public string BankName => Bank.GetName(BankType);
+        public string Name { get; set; } = "이름 없음";
+        public uint IntervalSeconds { get; set; } = 0;
+        public uint IntervalMins {
+            get
+            {
+                return IntervalSeconds / 60;
+            }
+            set
+            {
+                IntervalSeconds = value * 60;
+            }
+        }
+        public Bank Bank { get; set; } = Bank.ByCode("NH");
         public string Number { get; set; } = null;
         public string UserId { get; set; } = null;
         public string Password { get; set; } = null;
@@ -22,15 +33,16 @@ namespace BankSeeker.Lib
         public Dictionary<string, string> extra = new Dictionary<string, string>();
 
         // validate
-        internal void Validate()
+        public void Validate()
         {
-            if (BankType == null
+            if (Bank == null
                 || Number == null
                 || UserId == null
                 || Password == null)
             {
-                throw new Exception("ACCOUNT_VALIDATION_FAILED");
+                throw new AccountError();
             }
         }
+        public class AccountError : Exception {};
     }
 }

@@ -2,105 +2,182 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Web;
+using System.Web.Script.Serialization;
 
 namespace BankSeeker.Lib
 {
+    // raw data
+    public class Packet
+    {
+        public DateTime Date { get; internal set; }
+        public string Note { get; internal set; }
+        public string MyName { get; internal set; }
+        public string YourName { get; internal set; }
+        public decimal OutAmount { get; internal set; }
+        public decimal InAmount { get; internal set; }
+        public decimal Balance { get; internal set; }
+        public string Bank { get; internal set; }
+        public string Type { get; internal set; }
+    }
+
+    // 암호화 및 정제된 데이터
+    public class Package
+    {
+        public Packet Packet { get; internal set; }
+        public Account Account { get; internal set; }
+        public string Hash { get; internal set; }
+        public string CallbackResult { get; internal set; }
+    }
 
     // <summary>계좌 및 타이머를 설정하고, <see cref="Seeker">은행별 파서</see>를 생성 및 실행하고 이벤트 발행/구독 인터페이스 제공</summary>
-    class Teller
+    public class Teller
     {
-        // 계좌 설정 및 은행별 파서 생성
-        private Account account = null;
-        private Seeker seeker = null;
-        public Teller SetAccount(Account account)
-        {
-            this.account = account;
-            account.Validate();
-
-            System.Type BankSeekerType = Bank.GetSeekerType(account.BankType);
-            seeker = (Seeker)Activator.CreateInstance(BankSeekerType);
-            seeker.setTeller(this);
-            seeker.SetTimeoutSeconds((uint)(timer.Interval / 1000));
-            return this;
-        }
-
-        // 계좌 데이터 가져오기 및 이벤트 발행/구독 (데이터 갱신 여부는 체크하지 않음)
-        public delegate void TellerPacketEventHandler(List<Seeker.Packet> packets);
-        private event TellerPacketEventHandler TellerPacketEvent;
-        public async Task Fetch()
-        {
-            account.Validate();
-            var packets = await seeker.Fetch(account);
-            if (packets != null && packets.Count > 0) TellerPacketEvent(packets);
-        }
-        public Teller AttachHandler(TellerPacketEventHandler handler)
-        {
-            TellerPacketEvent += handler;
-            return this;
-        }
-        public Teller DetachHandler(TellerPacketEventHandler handler)
-        {
-            TellerPacketEvent -= handler;
-            return this;
-        }
-        private void InitHandler() // 생성자에서 콜
-        {
-            TellerPacketEvent += packets => Log(@"{packets.Count}개의 거래 조회 완료...");
-        }
-
-        // 자동 반복 타이머 설정
-        private Timer timer = new Timer();
-        public Teller SetTimerInterval(uint sec)
-        {
-            timer.Interval = (double)(sec * 1000);
-            if (seeker != null)
-            {
-                seeker.SetTimeoutSeconds((uint)(timer.Interval / 1000));
-            }
-            return this;
-        }
-        public Teller SetTimerEnabled(bool enabled)
-        {
-            timer.Enabled = enabled;
-            return this;
-        }
-        private void InitTimer() // 생성자에서 콜
-        {
-            SetTimerInterval(60); // 기본 1분
-            SetTimerEnabled(false);
-            timer.Elapsed += async (object sender, ElapsedEventArgs e) => await Fetch();
-        }
-
-        // 로거
+        // 로깅
         public delegate void TellerLogEventHandler(string log);
-        private event TellerLogEventHandler TellerLogEvent;
-        public Teller AttachLogger(TellerLogEventHandler handler)
+        public static event TellerLogEventHandler TellerLogEvent;
+        public static void Log(object log)
         {
-            TellerLogEvent += handler;
-            return this;
-        }
-        public void Log(string log)
-        {
+            var msg = Convert.ToString(log);
             if (TellerLogEvent != null)
             {
-                TellerLogEvent(log);
-            } else {
-                Console.WriteLine(log);
+                TellerLogEvent(msg);
+            }
+            else
+            {
+                Console.WriteLine(msg);
             }
         }
 
-        // 초기화
-        public Teller()
+        // 계좌 데이터 가져오기 및 이벤트 발행/구독
+        public delegate void TellerPackageEventHandler(List<Package> packages);
+        public static event TellerPackageEventHandler TellerPackageEvent = packages => Log($"{packages.Count}개의 내역 조회 완료...");
+        public delegate void TellerStopEventHandler();
+        public static event TellerStopEventHandler TellerStopEvent = () => Log($"조회 작업 종료...");
+
+        public bool IsFetching => isFetching;
+        private bool isFetching = false;
+        private Timer timer = null;
+        private Seeker seeker = null;
+        public void Fetch(Account account)
         {
-            InitHandler();
-            InitTimer();
+            if (isFetching) return;
+
+            // init seeker
+            account.Validate();
+            try
+            {
+
+                seeker = (Seeker)Activator.CreateInstance(account.Bank.SeekerType);
+            } catch(Exception)
+            {
+                return;
+            }
+            
+            // repeat or not
+            isFetching = true;
+            timer = new Timer();
+            timer.AutoReset = false;
+            timer.Interval = 1000;
+            timer.Elapsed += (object sender, ElapsedEventArgs e) =>
+            {
+                var pakages = seeker.Fetch(account);
+                if (pakages != null)
+                    TellerPackageEvent(pakages);
+            };
+            if (account.IntervalSeconds >  0)
+            {
+                timer.Elapsed += (object sender, ElapsedEventArgs e) =>
+                {
+                    if (timer.Enabled)
+                    {
+                        timer.Stop();
+                        timer.Interval = account.IntervalSeconds * 1000;
+                        timer.Start();
+                    }
+                };
+            }
+            else
+            {
+                timer.Elapsed += (object sender, ElapsedEventArgs e) =>
+                {
+                    Stop();
+                };
+            }
+            timer.Start();
         }
-        public Teller(Account account) : this()
+
+        public void Stop()
         {
-            SetAccount(account);
+            if (timer != null) timer.Dispose();
+            if (seeker != null) seeker.Dispose();
+            isFetching = false;
+            TellerStopEvent();
+        }
+
+        // feature for callback
+        public void Callback(Package package, string url, string secret = null)
+        {
+            try
+            {
+                // serialize package
+                MD5 md5 = new MD5CryptoServiceProvider();
+                var hashSig = md5.ComputeHash(Encoding.UTF8.GetBytes(package.Hash + secret));
+                var stringBuilder = new StringBuilder();
+                foreach (byte b in hashSig)
+                {
+                    stringBuilder.AppendFormat("{0:x2}", b);
+                }
+                var hashSigStr = stringBuilder.ToString();
+                var serializer = new JavaScriptSerializer();
+                var data = serializer.Serialize(new
+                {
+                    Hash = package.Hash,
+                    HashSignature = hashSigStr,
+                    Account = new
+                    {
+                        BankCode = package.Account.Bank.Code,
+                        Number = package.Account.Number,
+                    },
+                    Packet = package.Packet
+                }).Replace("\"\\/Date(", "").Replace(")\\/\"", ""); // replace wrong date format to just timestamp format
+
+                // create a request
+                Log($"POST {url} 거래 내역을 JSON 포맷으로 전송 완료...");
+                HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
+                request.KeepAlive = false;
+                request.ProtocolVersion = HttpVersion.Version11;
+                request.Method = "POST";
+                byte[] dataEncoded = Encoding.UTF8.GetBytes(data);
+
+                // send the request
+                request.ContentType = "application/json";
+                request.ContentLength = dataEncoded.Length;
+                Stream requestStream = request.GetRequestStream();
+                requestStream.Write(dataEncoded, 0, dataEncoded.Length);
+                requestStream.Close();
+
+                // get the response
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                var responseBody = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                Console.Write(responseBody);
+                package.CallbackResult = response.StatusCode.ToString();
+            }
+            catch (Exception)
+            {
+                Log($"POST {url} 거래 내역 전송 실패...");
+                package.CallbackResult = "ERR";
+            }
+        }
+
+        private object MD5(string data)
+        {
+            throw new NotImplementedException();
         }
     }
 }
