@@ -92,7 +92,7 @@ namespace BankSeeker.Lib.Seekers
                 // open password keypad
                 Teller.Log($"[{account.Name}] 비밀번호 키패드 이미지 추출...");
                 var password = By.Id("비밀번호");
-                wait.Until(ExpectedConditions.ElementToBeClickable(password));
+                // wait.Until(ExpectedConditions.ElementToBeClickable(password));
                 driver.FindElement(password).Click();
 
                 // save keypad image

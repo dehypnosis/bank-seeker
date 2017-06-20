@@ -165,15 +165,16 @@ namespace BankSeeker
             {
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
-                    foreach (var pack in packages)
+                    for(var i=packages.Count-1; i>=0; i--) // reverse order
                     {
+                        var pack = packages[i];
                         try
                         {
                             Packages.First(new Func<Package, bool>(package => package.Hash == pack.Hash));
                         }
                         catch (InvalidOperationException)
                         {
-                            Callback(pack);
+                            ProcessPackage(pack);
                         }
                     }
                     Update("Packages");
@@ -306,7 +307,7 @@ namespace BankSeeker
         public string Log { get; private set; }
 
         // 콜백
-        public void Callback(Package package)
+        public void ProcessPackage(Package package)
         {
             if (Configure.CallbackAutomatic)
                 teller.Callback(package, Configure.CallbackURL, Configure.CallbackSecret);
@@ -314,7 +315,7 @@ namespace BankSeeker
             var index = Packages.IndexOf(package);
             if (index == -1)
             {
-                Packages.Add(package);
+                Packages.Insert(0, package);
             }
             else
             {

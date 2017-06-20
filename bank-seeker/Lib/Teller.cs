@@ -89,12 +89,13 @@ namespace BankSeeker.Lib
                 var pakages = seeker.Fetch(account);
                 if (pakages != null)
                     TellerPackageEvent(pakages);
+                Console.WriteLine("Sent!");
             };
             if (account.IntervalSeconds >  0)
             {
                 timer.Elapsed += (object sender, ElapsedEventArgs e) =>
                 {
-                    if (timer.Enabled)
+                    if (isFetching)
                     {
                         timer.Stop();
                         timer.Interval = account.IntervalSeconds * 1000;
@@ -106,7 +107,10 @@ namespace BankSeeker.Lib
             {
                 timer.Elapsed += (object sender, ElapsedEventArgs e) =>
                 {
-                    Stop();
+                    if (isFetching)
+                    {
+                        Stop();
+                    }
                 };
             }
             timer.Start();

@@ -109,7 +109,7 @@ namespace BankSeeker
 
         private void PackageCallback_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.Callback((Package)((Button)sender).Tag);
+            viewModel.ProcessPackage((Package)((Button)sender).Tag);
         }
 
         private void ClearPackages_Click(object sender, RoutedEventArgs e)

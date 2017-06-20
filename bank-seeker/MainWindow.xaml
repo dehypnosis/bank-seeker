@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:BankSeeker"
         xmlns:helper="clr-namespace:BankSeeker.Helper"
         mc:Ignorable="d"
-        Title="BankSeeker" Height="670" Width="1100" HorizontalAlignment="Center" MinWidth="280" MinHeight="550">
+        Title="BankSeeker" Height="680" Width="1200" HorizontalAlignment="Center" MinWidth="280" MinHeight="550">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -15,9 +15,10 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="510"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="98*"/>
+            <RowDefinition Height="41*"/>
         </Grid.RowDefinitions>
-        <Grid Margin="10" Grid.Row="2" Grid.ColumnSpan="2">
+        <Grid Margin="10" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
                 <ScrollViewer x:Name="LogScrollViewer" Grid.Row="1" Grid.Column="1" Padding="5">
                     <TextBlock Text="{Binding Log, Mode=OneWay}" TextWrapping="Wrap" VerticalAlignment="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True">
@@ -49,16 +50,16 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Header="응답" Binding="{Binding CallbackResult, Mode=OneWay}" />
-                            <DataGridTextColumn SortDirection="Descending" Header="일자" Binding="{Binding Packet.Date, StringFormat={}{0:MM/dd hh:mm tt}}" />
-                            <DataGridTextColumn Header="계좌" Binding="{Binding Account.Name}" />
-                            <DataGridTextColumn Header="출금자명" Binding="{Binding Packet.OutName}" />
-                            <DataGridTextColumn Header="출금액" Binding="{Binding Packet.OutAmount, StringFormat=N0}" />
-                            <DataGridTextColumn Header="입금자명" Binding="{Binding Packet.InName}" />
+                            <DataGridTextColumn Header="일자" Binding="{Binding Packet.Date, StringFormat={}{0:MM/dd HH:mm}}" Width="110" />
+                            <DataGridTextColumn Header="계좌" Binding="{Binding Account.Name}" Width="100" />
+                            <DataGridTextColumn Header="입금자명" Binding="{Binding Packet.InName}" Width="80" />
                             <DataGridTextColumn Header="입금액" Binding="{Binding Packet.InAmount, StringFormat=N0}" />
+                            <DataGridTextColumn Header="출금자명" Binding="{Binding Packet.OutName}" Width="80" />
+                            <DataGridTextColumn Header="출금액" Binding="{Binding Packet.OutAmount, StringFormat=N0}" />
                             <DataGridTextColumn Header="잔액" Binding="{Binding Packet.Balance, StringFormat=N0}" />
-                            <DataGridTextColumn Header="구분" Binding="{Binding Packet.Type}" />
                             <DataGridTextColumn Header="적요" Binding="{Binding Packet.Note}" />
                             <DataGridTextColumn Header="영업점" Binding="{Binding Packet.Bank}" />
+                            <DataGridTextColumn Header="구분" Binding="{Binding Packet.Type}" />
                         </DataGrid.Columns>
                         <DataGrid.CellStyle>
                             <Style TargetType="DataGridCell">
