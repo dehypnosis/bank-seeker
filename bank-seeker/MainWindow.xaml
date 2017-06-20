@@ -7,14 +7,14 @@
         xmlns:local="clr-namespace:BankSeeker"
         xmlns:helper="clr-namespace:BankSeeker.Helper"
         mc:Ignorable="d"
-        Title="BankSeeker" Height="680" Width="1200" HorizontalAlignment="Center" MinWidth="280" MinHeight="550">
+        Title="BankSeeker" Height="680" Width="1200" HorizontalAlignment="Center" MinWidth="275" MinHeight="560">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="260"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="515"/>
+            <RowDefinition Height="520"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Margin="10" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
@@ -41,14 +41,6 @@
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,0" IsReadOnly="True"
                         Background="{x:Null}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" AutoGenerateColumns="False" GridLinesVisibility="None" FontSize="14">
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="콜백">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="호출" Padding="2,0,2,0" Click="PackageCallback_Click" Tag="{Binding}" Background="{x:Null}" BorderBrush="White" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Header="응답" Binding="{Binding CallbackResult, Mode=OneWay}" />
                             <DataGridTextColumn Header="일자" Binding="{Binding Packet.Date, StringFormat={}{0:MM/dd HH:mm}}" Width="110" />
                             <DataGridTextColumn Header="계좌" Binding="{Binding Account.Name}" Width="100" />
                             <DataGridTextColumn Header="입금자명" Binding="{Binding Packet.InName}" Width="80" />
@@ -59,6 +51,13 @@
                             <DataGridTextColumn Header="적요" Binding="{Binding Packet.Note}" />
                             <DataGridTextColumn Header="영업점" Binding="{Binding Packet.Bank}" />
                             <DataGridTextColumn Header="구분" Binding="{Binding Packet.Type}" />
+                            <DataGridTemplateColumn Header="" Width="45">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="콜백" Padding="2,0,2,0" Click="PackageCallback_Click" Tag="{Binding}" Background="{x:Null}" BorderBrush="White" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                         <DataGrid.CellStyle>
                             <Style TargetType="DataGridCell">
@@ -68,7 +67,7 @@
                         </DataGrid.CellStyle>
                     </DataGrid>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <Button Margin="10" Content="내역 전체 삭제" Padding="10,0,10,0" Height="25" Click="ClearPackages_Click" IsEnabled="{Binding IsNotFetching}" />
+                        <Button Margin="10" Content="내역 삭제" Padding="10,0,10,0" Height="25" Click="ClearPackages_Click" IsEnabled="{Binding IsNotFetching}" />
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -94,16 +93,14 @@
                                 ItemsSource="{Binding Accounts}" Height="68" SelectedItem="{Binding SelectedAccount}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock Grid.Column="0">
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="[{0}] {1}">
-                                                    <Binding Path="Bank.Name" />
-                                                    <Binding Path="Name" />
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                    </StackPanel>
+                                    <TextBlock>
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="[{0}] {1}">
+                                                <Binding Path="Bank.Name" />
+                                                <Binding Path="Name" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -172,7 +169,7 @@
                             <Label Content="반복 간격" Width="80"/>
                             <Slider
                                 IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
-                                Width="70" Height="18" Minimum="0" Maximum="60" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding IntervalMins}" />
+                                Width="70" Minimum="0" Maximum="60" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding IntervalMins}" VerticalAlignment="Center" />
                             <Label Content="{Binding IntervalMins}" ContentStringFormat="{}{0}분"/>
                         </StackPanel>
                         <Button Content="거래 내역 조회" Height="25" Click="Fetch_Click" Visibility="{Binding DataContext.VisibleWhenNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
@@ -183,25 +180,48 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="콜백 설정" Padding="5">
-
                 <StackPanel Margin="10">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Label Content="콜백 URL" Width="80"/>
-                        <TextBox 
-                                IsEnabled="{Binding IsNotFetching}"
-                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding Configure.CallbackURL}" Width="130"/>
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,10">
+                        <ListBox 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                ItemsSource="{Binding Callbacks}" Height="68" SelectedItem="{Binding SelectedCallback}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding URL}" TextWrapping="NoWrap"></TextBlock>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0" HorizontalAlignment="Right">
+                            <Button 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Content="추가" Padding="5" Margin="0,0,5,0" Click="AddCallback_Click" />
+                            <Button 
+                                IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Content="삭제" Padding="5" Visibility="{Binding SelectedCallbackVisibility}" Click="RemoveCallback_Click" />
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Label Content="암호키" Width="80"/>
-                        <TextBox 
-                                IsEnabled="{Binding IsNotFetching}"
-                                Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding Configure.CallbackSecret}" Width="130"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <Label Content="자동 호출" Width="80"/>
-                        <CheckBox
-                                IsEnabled="{Binding IsNotFetching}"
-                                Margin="0,7,0,0"  IsChecked="{Binding Configure.CallbackAutomatic}"/>
+                    <StackPanel Orientation="Vertical" Margin="0,0,0,10"
+                                Visibility="{Binding DataContext.SelectedCallbackVisibility, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                DataContext="{Binding SelectedCallback}">
+                        <Separator Margin="0,0,0,10"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="URL" Width="80"/>
+                            <TextBox 
+                            IsEnabled="{Binding IsNotFetching}"
+                            TextWrapping="NoWrap" AcceptsReturn="True" Text="{Binding URL}" Height="23" Width="130"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="암호키" Width="80"/>
+                            <TextBox 
+                            IsEnabled="{Binding IsNotFetching}"
+                            Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding SecretKey}" Width="130"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <Label Content="자동 호출" Width="80"/>
+                            <CheckBox
+                            IsEnabled="{Binding IsNotFetching}"
+                            Margin="0,7,0,0"  IsChecked="{Binding AutomaticEnabled}"/>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </TabItem>

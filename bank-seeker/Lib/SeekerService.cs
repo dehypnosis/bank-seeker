@@ -17,7 +17,6 @@ namespace BankSeeker.Lib
             // webdriver
             driverService = DriverService.CreateDefaultService();
             driverService.HideCommandPromptWindow = true;
-            
         }
 
         ~SeekerService()

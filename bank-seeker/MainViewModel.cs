@@ -16,8 +16,8 @@ namespace BankSeeker
 
     public class MainViewModel : INotifyPropertyChanged
     {
-        // 설정 모델
-        public class ConfigureModel : INotifyPropertyChanged
+        // 콜백 모델
+        public class Callback : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;
             private void Update(string property)
@@ -26,43 +26,43 @@ namespace BankSeeker
                     PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
 
-            private string callbackURL = "https://benzen.io/json.php";
-            public string CallbackURL
+            private string url = "";
+            public string URL
             {
                 get
                 {
-                    return callbackURL;
+                    return url;
                 }
                 set
                 {
-                    callbackURL = value;
-                    Update("CallbackURL");
+                    url = value;
+                    Update("URL");
                 }
             }
-            private string callbackSecret = "ANY_SECRET_KEY";
-            public string CallbackSecret
+            private string secretKey = "ANY_SECRET_KEY";
+            public string SecretKey
             {
                 get
                 {
-                    return callbackSecret;
+                    return secretKey;
                 }
                 set
                 {
-                    callbackSecret = value;
-                    Update("CallbackSecret");
+                    secretKey = value;
+                    Update("SecretKey");
                 }
             }
-            private bool callbackAutomatic = true;
-            public bool CallbackAutomatic
+            private bool automaticEnabled = true;
+            public bool AutomaticEnabled
             {
                 get
                 {
-                    return callbackAutomatic;
+                    return automaticEnabled;
                 }
                 set
                 {
-                    callbackAutomatic = value;
-                    Update("CallbackAutomatic");
+                    automaticEnabled = value;
+                    Update("AutomaticEnabled");
                 }
             }
         }
@@ -75,34 +75,25 @@ namespace BankSeeker
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
-        private ConfigureModel configure;
-        public ConfigureModel Configure {
-            get
-            {
-                return configure;
-            }
-            set
-            {
-                configure = value;
-                Update("Configure");
-            }
-        }
-
         public void LoadData()
         {
             try
             {
-                XmlSerializer xs = new XmlSerializer(typeof(ConfigureModel));
-                using (StreamReader rd = new StreamReader(ContentManager.getPath("configure.xml")))
+                XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<Callback>));
+                using (StreamReader rd = new StreamReader(ContentManager.getPath("callbacks.xml")))
                 {
-                    Configure = xs.Deserialize(rd) as ConfigureModel;
+                    Callbacks = xs.Deserialize(rd) as ObservableCollection<Callback>;
                 }
             }
             catch (Exception)
             {
-                Configure = new ConfigureModel();
+                Callbacks = new ObservableCollection<Callback>();
             }
-            if (Accounts == null) Accounts = new ObservableCollection<Account>();
+            if (Callbacks == null) Callbacks = new ObservableCollection<Callback>();
+            if (Callbacks.Count > 0)
+            {
+                SelectedCallback = Callbacks[0];
+            }
 
             try
             {
@@ -139,10 +130,10 @@ namespace BankSeeker
 
         public void SaveData()
         {
-            XmlSerializer xs = new XmlSerializer(typeof(ConfigureModel));
-            using (StreamWriter wr = new StreamWriter(ContentManager.getPath("configure.xml")))
+            XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<Callback>));
+            using (StreamWriter wr = new StreamWriter(ContentManager.getPath("callbacks.xml")))
             {
-                xs.Serialize(wr, Configure);
+                xs.Serialize(wr, Callbacks);
             }
 
             xs = new XmlSerializer(typeof(ObservableCollection<Account>));
@@ -193,6 +184,21 @@ namespace BankSeeker
             };
         }
 
+        // 콜백 설정
+        private ObservableCollection<Callback> callbacks;
+        public ObservableCollection<Callback> Callbacks
+        {
+            get
+            {
+                return callbacks;
+            }
+            set
+            {
+                callbacks = value;
+                Update("Callbacks");
+            }
+        }
+
         // 계좌
         private ObservableCollection<Account> accounts;
         public ObservableCollection<Account> Accounts {
@@ -228,7 +234,7 @@ namespace BankSeeker
         }
         public void RemoveAccount()
         {
-            Accounts.Remove(selectedAccount);
+            Accounts.Remove(SelectedAccount);
             SelectedAccount = null;
         }
 
@@ -307,10 +313,39 @@ namespace BankSeeker
         public string Log { get; private set; }
 
         // 콜백
-        public void ProcessPackage(Package package)
+        private Callback selectedCallback = null;
+        public Callback SelectedCallback
         {
-            if (Configure.CallbackAutomatic)
-                teller.Callback(package, Configure.CallbackURL, Configure.CallbackSecret);
+            get { return selectedCallback; }
+            set
+            {
+                selectedCallback = value;
+                Update("SelectedCallback");
+                Update("SelectedCallbackVisibility");
+            }
+        }
+        public Visibility SelectedCallbackVisibility => SelectedCallback == null ? Visibility.Collapsed : Visibility.Visible;
+
+        internal void AddCallback()
+        {
+            var callback = new Callback();
+            Callbacks.Add(callback);
+            SelectedCallback = callback;
+        }
+
+        internal void RemoveCallback()
+        {
+            Callbacks.Remove(SelectedCallback);
+            SelectedCallback = null;
+        }
+
+        public void ProcessPackage(Package package, bool forcelyCallback = false)
+        {
+            foreach(var callback in Callbacks)
+            {
+                if (forcelyCallback || callback.AutomaticEnabled)
+                    teller.Callback(package, callback.URL, callback.SecretKey);
+            }
 
             var index = Packages.IndexOf(package);
             if (index == -1)

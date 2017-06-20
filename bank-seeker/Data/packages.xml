@@ -14,7 +14,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1175315923</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -30,7 +29,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1814745772</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -46,7 +44,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1643348437</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -62,7 +59,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2285969086</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -78,7 +74,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1368870543</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -94,7 +89,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2787318555</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -110,7 +104,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>600127862</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -126,7 +119,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2325503076</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -142,7 +134,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1185028125</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -158,7 +149,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>4233439353</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -174,7 +164,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>4104360716</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -190,7 +179,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3768231663</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -206,7 +194,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1810827259</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -222,7 +209,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3176295564</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -238,7 +224,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>207876619</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -254,7 +239,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1317873051</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -270,7 +254,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>551399719</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -286,7 +269,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1582232652</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -302,7 +284,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>4237445929</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -318,7 +299,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3363851231</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -334,7 +314,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2685822425</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -350,7 +329,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2240440986</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -366,7 +344,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>652977210</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -382,7 +359,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3885185289</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -398,7 +374,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3161025008</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -414,7 +389,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3134707608</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -430,7 +404,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>567928736</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -446,7 +419,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2253723471</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -462,7 +434,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3504928394</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -478,7 +449,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2425137292</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -494,7 +464,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1566957083</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -510,7 +479,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1926892853</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -526,7 +494,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2828056298</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -542,7 +509,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2893152255</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -558,7 +524,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3142011292</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -574,7 +539,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2359768510</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -590,7 +554,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3494852873</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -606,7 +569,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3221787845</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -622,7 +584,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1743436699</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -638,7 +599,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2173586706</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -654,7 +614,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2255638848</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -670,7 +629,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1611781933</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -686,7 +644,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>298713125</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -702,7 +659,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>140395500</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -718,7 +674,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1545296159</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -734,7 +689,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3798693632</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -750,7 +704,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1813991798</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -766,7 +719,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3732287172</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -782,7 +734,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1840549392</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -798,7 +749,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>880987953</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -830,7 +780,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1980551094</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -846,7 +795,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1021994552</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -862,7 +810,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>518901665</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -878,7 +825,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3903002800</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -894,7 +840,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2021607668</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -910,7 +855,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2538605899</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -926,7 +870,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2193806282</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -942,7 +885,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2022267717</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -958,7 +900,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3571646625</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -974,7 +915,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3494704575</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -990,7 +930,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1641650007</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1006,7 +945,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>329565442</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1022,7 +960,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3949486354</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1038,7 +975,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3966450592</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1054,7 +990,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1963447808</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1070,7 +1005,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2314947222</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1086,7 +1020,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2623557044</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1102,7 +1035,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2932141243</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1118,7 +1050,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1238077659</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1134,7 +1065,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>4162935167</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1150,7 +1080,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1284763923</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1166,7 +1095,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>495350996</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1182,7 +1110,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2760879582</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1198,7 +1125,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>209777047</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1214,7 +1140,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1818692255</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1230,7 +1155,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>418645676</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1246,7 +1170,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2452581623</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1262,7 +1185,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>483141491</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1278,7 +1200,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3408466781</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1294,7 +1215,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3182843789</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1310,7 +1230,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3457809287</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1326,7 +1245,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3576368060</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1342,7 +1260,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>505356644</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1358,7 +1275,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3535514412</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1374,7 +1290,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1708054061</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1390,7 +1305,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>4042713256</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1406,7 +1320,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3594048882</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1422,7 +1335,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>147192989</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1438,7 +1350,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1485123444</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1454,7 +1365,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1826502273</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1470,7 +1380,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>867692840</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1486,7 +1395,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>1407748193</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1502,7 +1410,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>4130189395</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1518,7 +1425,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>23369248</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1534,7 +1440,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3839750746</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1550,7 +1455,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>200103335</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1566,7 +1470,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>4070458591</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1582,7 +1485,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>2313681196</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1598,7 +1500,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>4183734835</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1613,7 +1514,6 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>316920149</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
   <Package>
     <Packet>
@@ -1628,6 +1528,5 @@
     </Packet>
     <Account Name="테스트1" IntervalMins="2" Bank.Code="KB" Number="957502-01-427751" UserId="YEO7311" Password="1524" DateRangeDays="74" />
     <Hash>3701961896</Hash>
-    <CallbackResult>OK</CallbackResult>
   </Package>
 </ArrayOfPackage>

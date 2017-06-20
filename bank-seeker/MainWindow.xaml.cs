@@ -90,6 +90,16 @@ namespace BankSeeker
             if (Confirm("정말 삭제하시겠습니까?"))
                 viewModel.RemoveAccount();
         }
+        private void AddCallback_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.AddCallback();
+        }
+
+        private void RemoveCallback_Click(object sender, RoutedEventArgs e)
+        {
+            if (Confirm("정말 삭제하시겠습니까?"))
+                viewModel.RemoveCallback();
+        }
 
         private void Fetch_Click(object sender, RoutedEventArgs e)
         {
@@ -109,7 +119,7 @@ namespace BankSeeker
 
         private void PackageCallback_Click(object sender, RoutedEventArgs e)
         {
-            viewModel.ProcessPackage((Package)((Button)sender).Tag);
+            viewModel.ProcessPackage((Package)((Button)sender).Tag, true);
         }
 
         private void ClearPackages_Click(object sender, RoutedEventArgs e)

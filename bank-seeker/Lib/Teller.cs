@@ -26,13 +26,12 @@ namespace BankSeeker.Lib
         public string Type { get; set; }
     }
 
-    // 암호화 및 정제된 데이터
+    // 종합 데이터 및 해시
     public class Package
     {
         public Packet Packet { get; set; }
         public Account Account { get; set; }
         public string Hash { get; set; }
-        public string CallbackResult { get; set; }
     }
 
     // <summary>계좌 및 타이머를 설정하고, <see cref="Seeker">은행별 파서</see>를 생성 및 실행하고 이벤트 발행/구독 인터페이스 제공</summary>
@@ -118,13 +117,17 @@ namespace BankSeeker.Lib
         }
 
         // feature for callback
-        public void Callback(Package package, string url, string secret = null)
+        public void Callback(Package package, string url, string secretKey = "FEED_A_SECRET_KEY")
         {
+            var transaction = $"{package.Account.Name}/" + (package.Packet.InAmount == 0 ?
+                    $"{package.Packet.OutName}/{String.Format("{0:N0}", package.Packet.OutAmount)}" :
+                    $"{package.Packet.InName}/{String.Format("{0:N0}", package.Packet.InAmount)}");
+
             try
             {
                 // serialize package
                 MD5 md5 = new MD5CryptoServiceProvider();
-                var hashSig = md5.ComputeHash(Encoding.UTF8.GetBytes(package.Hash + secret));
+                var hashSig = md5.ComputeHash(Encoding.UTF8.GetBytes(package.Hash + secretKey));
                 var stringBuilder = new StringBuilder();
                 foreach (byte b in hashSig)
                 {
@@ -145,7 +148,6 @@ namespace BankSeeker.Lib
                 }).Replace("\"\\/Date(", "").Replace(")\\/\"", ""); // replace wrong date format to just timestamp format
 
                 // create a request
-                Log($"POST {url} 거래 내역을 JSON 포맷으로 전송 완료...");
                 HttpWebRequest request = (HttpWebRequest) WebRequest.Create(url);
                 request.KeepAlive = false;
                 request.ProtocolVersion = HttpVersion.Version11;
@@ -162,13 +164,12 @@ namespace BankSeeker.Lib
                 // get the response
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 var responseBody = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                Console.Write(responseBody);
-                package.CallbackResult = response.StatusCode.ToString();
+                var result = response.StatusCode.ToString();
+                Log($"POST {url} {transaction} 전송 {result}...");
             }
             catch (Exception)
             {
-                Log($"POST {url} 거래 내역 전송 실패...");
-                package.CallbackResult = "ERR";
+                Log($"POST {url} {transaction} 전송 실패...");
             }
         }
 

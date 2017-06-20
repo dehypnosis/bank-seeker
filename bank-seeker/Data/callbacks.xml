@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCallback xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Callback>
+    <URL>https://benzen.io/json.php</URL>
+    <SecretKey>ANY_SECRET_KEY</SecretKey>
+    <AutomaticEnabled>true</AutomaticEnabled>
+  </Callback>
+  <Callback>
+    <URL>https://benzen.io/test1.php</URL>
+    <SecretKey>ANY_SECRET_KEY</SecretKey>
+    <AutomaticEnabled>true</AutomaticEnabled>
+  </Callback>
+  <Callback>
+    <URL>https://benzen.io/test2.php</URL>
+    <SecretKey>ANY_SECRET_KEY</SecretKey>
+    <AutomaticEnabled>false</AutomaticEnabled>
+  </Callback>
+</ArrayOfCallback>
