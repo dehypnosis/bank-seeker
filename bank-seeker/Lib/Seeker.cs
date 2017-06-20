@@ -10,6 +10,9 @@ namespace BankSeeker.Lib
     // <summary>은행별 파서의 인터페이스 및 데이터 구조, Fetch 호출시 서비스의 도움을 받아서 비동기로 데이터를 파싱하고 포맷에 맞게 변환</summary>
     abstract public class Seeker : IDisposable
     {
+        // 공용 서비스
+        static protected SeekerService Service = new SeekerService();
+
         protected class NeedToRefetchError : Exception { }
         protected abstract List<Packet> FetchPackets(Account account);
 
@@ -39,5 +42,9 @@ namespace BankSeeker.Lib
         }
 
         public abstract void Dispose();
+
+        ~Seeker() {
+            Dispose();
+        }
     }
 }

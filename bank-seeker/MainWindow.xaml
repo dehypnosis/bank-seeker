@@ -14,9 +14,8 @@
             <ColumnDefinition Width="260"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="510"/>
-            <RowDefinition Height="98*"/>
-            <RowDefinition Height="41*"/>
+            <RowDefinition Height="515"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Margin="10" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
             <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">

@@ -4,16 +4,12 @@ using System.Drawing;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-
-//using Driver = OpenQA.Selenium.Chrome.ChromeDriver;
-//using DriverService = OpenQA.Selenium.Chrome.ChromeDriverService;
-using Driver = OpenQA.Selenium.PhantomJS.PhantomJSDriver;
-using DriverService = OpenQA.Selenium.PhantomJS.PhantomJSDriverService;
-
-using Shipwreck.Phash;
 using System.Collections.Generic;
-using OpenQA.Selenium.Interactions;
 using BankSeeker.Helper;
+using Shipwreck.Phash;
+// using Driver = OpenQA.Selenium.Chrome.ChromeDriver;
+using Driver = OpenQA.Selenium.PhantomJS.PhantomJSDriver;
+using OpenQA.Selenium.Interactions;
 
 namespace BankSeeker.Lib.Seekers
 {
@@ -22,50 +18,24 @@ namespace BankSeeker.Lib.Seekers
     public class SeekerKB : Seeker
     {
         // headless browser
-        private DriverService driverService = null;
         private Driver driver = null;
-
-        ~SeekerKB()
-        {
-            Dispose();
-        }
-
+        
         public override void Dispose()
         {
-            if (driverService != null && driverService.IsRunning)
-            {
-                driverService.Dispose();
-            }
             if (driver != null)
-            {
                 driver.Dispose();
-            }
         }
 
         protected override List<Packet> FetchPackets(Account account)
         {
-            if (driverService == null)
-            {
-                Teller.Log($"[{account.Name}] 가상 브라우저 초기화...");
-                driverService = DriverService.CreateDefaultService();
-                driverService.HideCommandPromptWindow = true;
-            }
-
-            //if (driver != null)
-            //{
-            //    Teller.Log($"[{account.Name}] 가상 브라우저가 아직 작업을 수행 중... 간격이 너무 짧습니다.");
-            //    return null; // to be a Singleton becauseof race for BMP files
-            //}
-
+            // open page
             try
             {
-                // open page
+                driver = Seeker.Service.GetDriver();
                 Teller.Log($"[{account.Name}] 페이지를 초기화...");
-                driver = new Driver(driverService);
                 driver.Manage().Window.Size = new Size(765, 1000);
-                driver.Navigate().GoToUrl("https://obank1.kbstar.com/quics?page=C025255&cc=b028364:b028702");
+                driver.Navigate().GoToUrl("https://obank1.kbstar.com/quics?page=C025255&cc=b028364:b028702");// fill the form
 
-                // fill the form
                 Teller.Log($"[{account.Name}] 로딩이 끝나기를 기다림...");
                 var timeoutSeconds = account.IntervalSeconds;
                 if (timeoutSeconds < 30) timeoutSeconds = 30;
@@ -92,7 +62,7 @@ namespace BankSeeker.Lib.Seekers
                 // open password keypad
                 Teller.Log($"[{account.Name}] 비밀번호 키패드 이미지 추출...");
                 var password = By.Id("비밀번호");
-                // wait.Until(ExpectedConditions.ElementToBeClickable(password));
+                wait.Until(ExpectedConditions.ElementToBeClickable(password));
                 driver.FindElement(password).Click();
 
                 // save keypad image
@@ -100,6 +70,7 @@ namespace BankSeeker.Lib.Seekers
                 var keypad = By.CssSelector(".keypadWrap img");
                 wait.Until(ExpectedConditions.ElementToBeClickable(keypad));
                 driver.GetScreenshot().SaveAsFile(keypadImagePath, ScreenshotImageFormat.Bmp);
+
                 using (var bitmapKeypad = Bitmap.FromFile(keypadImagePath))
                 {
                     // analyze keypad image
@@ -155,7 +126,7 @@ namespace BankSeeker.Lib.Seekers
                         }
 
                         // crop image
-                        var btnImagePath = ContentManager.getPath($@"KB/KB_keypad_{btnLocation.Key}.bmp") ;
+                        var btnImagePath = ContentManager.getPath($@"KB/KB_keypad_{btnLocation.Key}.bmp");
                         var rect = new Rectangle(btnLocation.Value.X - 22, btnLocation.Value.Y - 22, 44, 44);
                         using (var bitmap = new Bitmap(rect.Width, rect.Height))
                         using (var graphic = Graphics.FromImage(bitmap))
@@ -222,70 +193,71 @@ namespace BankSeeker.Lib.Seekers
                     new Actions(driver).MoveToElement(zero).MoveByOffset(locationTo.X + dx, locationTo.Y + dy).Click().Perform();
                     Teller.Log($"[{account.Name}] 확인 ({locationTo.X + dx}, {locationTo.Y + dy}) 클릭...");
 
+
                     // submit the form
                     wait.Until(ExpectedConditions.InvisibilityOfElementLocated(keypad));
                     var submit = By.CssSelector("input[type=submit]");
                     driver.FindElement(submit).Click();
+                }
 
-                    // check page loaded
-                    var table = By.CssSelector(".tType01");
-                    wait.Until(ExpectedConditions.ElementIsVisible(table));
+                // check page loaded
+                var table = By.CssSelector(".tType01");
+                wait.Until(ExpectedConditions.ElementIsVisible(table));
 
-                    // reprocessing as Packet def
-                    List<Packet> packets = new List<Packet>();
-                    for (var pageNum = 0; true; pageNum++)
+                // reprocessing as Packet def
+                List<Packet> packets = new List<Packet>();
+                for (var pageNum = 0; true; pageNum++)
+                {
+                    Teller.Log($"[{account.Name}] {pageNum + 1} 페이지 파싱 및 분석...");
+                    //driver.GetScreenshot().SaveAsFile(ContentManager.getPath($@"KB/KB_result_{pageNum}.bmp"), ScreenshotImageFormat.Bmp);
+
+                    var trs = driver.FindElementsByCssSelector(".tType01 tbody tr");
+                    if (trs.Count < 2)
                     {
-                        Teller.Log($"[{account.Name}] {pageNum + 1} 페이지 파싱 및 분석...");
-                        driver.GetScreenshot().SaveAsFile(ContentManager.getPath($@"KB/KB_result_{pageNum}.bmp"), ScreenshotImageFormat.Bmp);
-
-                        var trs = driver.FindElementsByCssSelector(".tType01 tbody tr");
-                        if (trs.Count < 2)
+                        Teller.Log($"[{account.Name}] {pageNum + 1} 페이지 거래 내역 없음. 페이지 종료...");
+                        break; // No items
+                    }
+                    for (var i = 0; i < trs.Count; i++)
+                    {
+                        var tr = trs[i];
+                        if (i % 2 == 0)
                         {
-                            Teller.Log($"[{account.Name}] {pageNum + 1} 페이지 거래 내역 없음. 페이지 종료...");
-                            break; // No items
-                        }
-                        for (var i = 0; i < trs.Count; i++)
-                        {
-                            var tr = trs[i];
-                            if (i % 2 == 0)
+                            var datetimeTemp = tr.FindElement(By.CssSelector("td:nth-child(1)")).GetAttribute("textContent").Trim();
+                            datetimeTemp = datetimeTemp.Substring(0, 10) + " " + datetimeTemp.Substring(10);
+                            var packet = new Packet
                             {
-                                var datetimeTemp = tr.FindElement(By.CssSelector("td:nth-child(1)")).GetAttribute("textContent").Trim();
-                                datetimeTemp = datetimeTemp.Substring(0, 10) + " " + datetimeTemp.Substring(10);
-                                var packet = new Packet
-                                {
-                                    Date = Convert.ToDateTime(datetimeTemp),
-                                    Note = tr.FindElement(By.CssSelector("td:nth-child(2)")).GetAttribute("textContent").Trim(),
-                                    OutName = tr.FindElement(By.CssSelector("td:nth-child(3)")).GetAttribute("textContent").Trim(),
-                                    OutAmount = Convert.ToDecimal(tr.FindElement(By.CssSelector("td:nth-child(4)")).GetAttribute("textContent").Trim()),
-                                    InAmount = Convert.ToDecimal(tr.FindElement(By.CssSelector("td:nth-child(5)")).GetAttribute("textContent").Trim()),
-                                    Balance = Convert.ToDecimal(tr.FindElement(By.CssSelector("td:nth-child(6)")).GetAttribute("textContent").Trim()),
-                                    Bank = tr.FindElement(By.CssSelector("td:nth-child(7)")).GetAttribute("textContent").Trim(),
-                                    Type = tr.FindElement(By.CssSelector("td:nth-child(8)")).GetAttribute("textContent").Trim(),
-                                };
-                                packets.Add(packet);
-                            }
-                            else
-                            {
-                                packets[(i - 1) / 2].InName = tr.GetAttribute("textContent").Trim();
-                            }
+                                Date = Convert.ToDateTime(datetimeTemp),
+                                Note = tr.FindElement(By.CssSelector("td:nth-child(2)")).GetAttribute("textContent").Trim(),
+                                OutName = tr.FindElement(By.CssSelector("td:nth-child(3)")).GetAttribute("textContent").Trim(),
+                                OutAmount = Convert.ToDecimal(tr.FindElement(By.CssSelector("td:nth-child(4)")).GetAttribute("textContent").Trim()),
+                                InAmount = Convert.ToDecimal(tr.FindElement(By.CssSelector("td:nth-child(5)")).GetAttribute("textContent").Trim()),
+                                Balance = Convert.ToDecimal(tr.FindElement(By.CssSelector("td:nth-child(6)")).GetAttribute("textContent").Trim()),
+                                Bank = tr.FindElement(By.CssSelector("td:nth-child(7)")).GetAttribute("textContent").Trim(),
+                                Type = tr.FindElement(By.CssSelector("td:nth-child(8)")).GetAttribute("textContent").Trim(),
+                            };
+                            packets.Add(packet);
                         }
-
-                        // for pagination
-                        try
+                        else
                         {
-                            driver.FindElementByCssSelector(".optionBtnArea .leftArea .next input").Click();
-                            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("loading")));
-                            wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id("loading")));
-                        }
-                        catch (NoSuchElementException)
-                        {
-                            Teller.Log($"[{account.Name}] 페이지 종료...");
-                            break;
+                            packets[(i - 1) / 2].InName = tr.GetAttribute("textContent").Trim();
                         }
                     }
 
-                    return packets;
+                    // for pagination
+                    try
+                    {
+                        driver.FindElementByCssSelector(".optionBtnArea .leftArea .next input").Click();
+                        wait.Until(ExpectedConditions.ElementIsVisible(By.Id("loading")));
+                        wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.Id("loading")));
+                    }
+                    catch (NoSuchElementException)
+                    {
+                        Teller.Log($"[{account.Name}] 페이지 종료...");
+                        break;
+                    }
                 }
+
+                return packets;
             }
             catch (WebDriverException e)
             {
@@ -304,10 +276,7 @@ namespace BankSeeker.Lib.Seekers
             }
             finally
             {
-                if (driver != null)
-                {
-                    driver.Dispose();
-                }
+                Dispose();
             }
         }
     }

@@ -98,6 +98,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helper.cs" />
+    <Compile Include="Lib\SeekerService.cs" />
     <Compile Include="Lib\Seekers\KB.cs" />
     <Compile Include="Lib\Seeker.cs" />
     <Compile Include="Lib\Seekers\NH.cs" />

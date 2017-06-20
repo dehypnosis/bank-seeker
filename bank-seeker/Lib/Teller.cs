@@ -68,52 +68,45 @@ namespace BankSeeker.Lib
         {
             if (isFetching) return;
 
-            // init seeker
+            // run seeker
             account.Validate();
-            try
+            using (seeker = (Seeker)Activator.CreateInstance(account.Bank.SeekerType))
             {
-
-                seeker = (Seeker)Activator.CreateInstance(account.Bank.SeekerType);
-            } catch(Exception)
-            {
-                return;
-            }
-            
-            // repeat or not
-            isFetching = true;
-            timer = new Timer();
-            timer.AutoReset = false;
-            timer.Interval = 1000;
-            timer.Elapsed += (object sender, ElapsedEventArgs e) =>
-            {
-                var pakages = seeker.Fetch(account);
-                if (pakages != null)
-                    TellerPackageEvent(pakages);
-                Console.WriteLine("Sent!");
-            };
-            if (account.IntervalSeconds >  0)
-            {
+                // repeat or not
+                isFetching = true;
+                timer = new Timer();
+                timer.AutoReset = false;
+                timer.Interval = 1000;
                 timer.Elapsed += (object sender, ElapsedEventArgs e) =>
                 {
-                    if (isFetching)
-                    {
-                        timer.Stop();
-                        timer.Interval = account.IntervalSeconds * 1000;
-                        timer.Start();
-                    }
+                    var pakages = seeker.Fetch(account);
+                    if (pakages != null)
+                        TellerPackageEvent(pakages);
                 };
-            }
-            else
-            {
-                timer.Elapsed += (object sender, ElapsedEventArgs e) =>
+                if (account.IntervalSeconds > 0)
                 {
-                    if (isFetching)
+                    timer.Elapsed += (object sender, ElapsedEventArgs e) =>
                     {
-                        Stop();
-                    }
-                };
+                        if (isFetching)
+                        {
+                            timer.Stop();
+                            timer.Interval = account.IntervalSeconds * 1000;
+                            timer.Start();
+                        }
+                    };
+                }
+                else
+                {
+                    timer.Elapsed += (object sender, ElapsedEventArgs e) =>
+                    {
+                        if (isFetching)
+                        {
+                            Stop();
+                        }
+                    };
+                }
+                timer.Start();
             }
-            timer.Start();
         }
 
         public void Stop()
