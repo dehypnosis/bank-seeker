@@ -13,7 +13,6 @@ using System.Xml.Serialization;
 
 namespace BankSeeker
 {
-
     public class MainViewModel : INotifyPropertyChanged
     {
         // 콜백 모델
@@ -149,6 +148,9 @@ namespace BankSeeker
             }
         }
 
+        // status 체크용 웹서버
+        private StatusServer server;
+
         public MainViewModel()
         {
             // 조회 내역 처리
@@ -174,6 +176,7 @@ namespace BankSeeker
             Teller.TellerStopEvent += () =>
             {
                 IsFetching = false;
+                server.Update("OFF");
             };
 
             // 로그 처리
@@ -182,6 +185,10 @@ namespace BankSeeker
                 Log += $"\n[{DateTime.Now.ToString()}] {log}";
                 Update("Log");
             };
+
+            // 서버 시작
+            server = new StatusServer();
+            Teller.Log("http://0.0.0.0:7964 에서 서비스 상태 웹서버 시작...");
         }
 
         // 콜백 설정
@@ -266,6 +273,7 @@ namespace BankSeeker
         {
             teller.Fetch(SelectedAccount);
             IsFetching = true;
+            server.Update("ON");
         }
 
         private bool canStop = true;

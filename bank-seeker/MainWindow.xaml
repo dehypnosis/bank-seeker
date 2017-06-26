@@ -207,19 +207,19 @@
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                             <Label Content="URL" Width="80"/>
                             <TextBox 
-                            IsEnabled="{Binding IsNotFetching}"
+                            IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                             TextWrapping="NoWrap" AcceptsReturn="True" Text="{Binding URL}" Height="23" Width="130"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                             <Label Content="암호키" Width="80"/>
                             <TextBox 
-                            IsEnabled="{Binding IsNotFetching}"
+                            IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                             Height="23"  TextWrapping="NoWrap" AcceptsReturn="False" Text="{Binding SecretKey}" Width="130"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                             <Label Content="자동 호출" Width="80"/>
                             <CheckBox
-                            IsEnabled="{Binding IsNotFetching}"
+                            IsEnabled="{Binding DataContext.IsNotFetching, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                             Margin="0,7,0,0"  IsChecked="{Binding AutomaticEnabled}"/>
                         </StackPanel>
                     </StackPanel>
