@@ -34,12 +34,12 @@ namespace BankSeeker
         public MainWindow()
         {
             // 뷰 모델 생성
+            Loaded += MainWindow_Loaded;
+            Closed += MainWindow_Closed;
             DataContext = new MainViewModel();
             viewModel = this.DataContext as MainViewModel;
 
             InitializeComponent();
-            Loaded += MainWindow_Loaded;
-            Closed += MainWindow_Closed;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)

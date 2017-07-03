@@ -28,6 +28,8 @@ namespace BankSeeker.Lib.Seekers
 
         protected override List<Packet> FetchPackets(Account account)
         {
+            var tick = DateTime.Now.Ticks;
+
             // open page
             try
             {
@@ -66,7 +68,7 @@ namespace BankSeeker.Lib.Seekers
                 driver.FindElement(password).Click();
 
                 // save keypad image
-                var keypadImagePath = ContentManager.getPath(@"KB/KB_keypad.bmp");
+                var keypadImagePath = ContentManager.getPath($@"KB/{tick}.keypad.bmp");
                 var keypad = By.CssSelector(".keypadWrap img");
                 wait.Until(ExpectedConditions.ElementToBeClickable(keypad));
                 driver.GetScreenshot().SaveAsFile(keypadImagePath, ScreenshotImageFormat.Bmp);
@@ -126,7 +128,7 @@ namespace BankSeeker.Lib.Seekers
                         }
 
                         // crop image
-                        var btnImagePath = ContentManager.getPath($@"KB/KB_keypad_{btnLocation.Key}.bmp");
+                        var btnImagePath = ContentManager.getPath($@"KB/{tick}.{btnLocation.Key}.bmp");
                         var rect = new Rectangle(btnLocation.Value.X - 22, btnLocation.Value.Y - 22, 44, 44);
                         using (var bitmap = new Bitmap(rect.Width, rect.Height))
                         using (var graphic = Graphics.FromImage(bitmap))
@@ -199,6 +201,7 @@ namespace BankSeeker.Lib.Seekers
                     var submit = By.CssSelector("input[type=submit]");
                     driver.FindElement(submit).Click();
                 }
+                              
 
                 // check page loaded
                 var table = By.CssSelector(".tType01");
@@ -262,7 +265,7 @@ namespace BankSeeker.Lib.Seekers
             catch (WebDriverException e)
             {
                 Teller.Log($"[{account.Name}] 가상 브라우저 비정상 종료...\n{e.Message}");
-                return null;
+                throw new NeedToRefetchError();
             }
             catch (NeedToRefetchError)
             {
@@ -270,14 +273,30 @@ namespace BankSeeker.Lib.Seekers
             }
             catch (Exception e)
             {
-                Teller.Log($"[{account.Name}] 처리되지 않은 예외 발생...");
-                Teller.Log(e);
-                return null;
+                Teller.Log($"[{account.Name}] 처리되지 않은 예외 발생...\n{e.Message}");
+                throw new NeedToRefetchError();
             }
             finally
             {
+                // delete temp files
+                DisposeFile($@"KB/{tick}.keypad.bmp");
+                DisposeFile($@"KB/{tick}.xxx1.bmp");
+                DisposeFile($@"KB/{tick}.xxx2.bmp");
+                DisposeFile($@"KB/{tick}.xxx3.bmp");
+                DisposeFile($@"KB/{tick}.xxx4.bmp");
+                DisposeFile($@"KB/{tick}.xxx5.bmp");
                 Dispose();
             }
         }
+
+        private void DisposeFile(string path)
+        {
+            try
+            {
+                System.IO.File.Delete(ContentManager.getPath(path));
+            }
+            catch { }
+        }
     }
+
 }

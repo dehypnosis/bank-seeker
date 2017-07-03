@@ -188,7 +188,7 @@ namespace BankSeeker
 
             // 서버 시작
             server = new StatusServer();
-            Teller.Log("http://0.0.0.0:7964 에서 서비스 상태 웹서버 시작...");
+            Teller.Log($"http://0.0.0.0:{server.Port} 에서 서비스 상태 웹서버 시작...");
         }
 
         // 콜백 설정
